@@ -1,0 +1,80 @@
+@media screen and (max-width: 768px)
+	body
+		overflow-x: hidden
+		position: relative
+		left: 0
+		+addAnimation
+
+	#make-compact
+		display: none
+	
+	// Hide menu
+	.page-container
+		padding-left: 0
+
+	#sidebar
+		left: -$sidebarWidth
+	
+	// Menu shown
+	.show-menu
+		left: $sidebarWidth
+
+	.show-menu #sidebar
+		left: -$sidebarWidth
+
+	// Header
+	.header-site
+		height: $headerHeight - 20px
+
+	.header-nav
+		height: $headerHeight - 20px
+		> li
+			> a
+				min-height: $headerHeight - 20px
+				min-width: 50px
+				line-height: $headerHeight - 25
+				padding: 0 10px
+				font-size: 20px
+			.badge
+				position: absolute
+				top: 8px
+				right: 5px
+
+	.page-title
+		h4
+			margin: 13px 0 0 0
+		nav
+			display: none
+		#toggle-menu
+			display: inline-block
+
+	.sidebar-header
+		height: $headerHeight - 20px
+		h1
+			margin: 8px 0 0 20px
+
+	// Login screen
+	.login-page
+		.login-buttons
+			strong
+				display: block
+				margin: 15px 0
+
+@media screen and (max-width: 480px)
+	.page-title h4 span
+		display: none !important
+
+@media screen and (max-width: 350px)
+	.sidebar-header
+		line-height: 50px
+	#hide-menu
+		display: inline-block !important
+		font-size: 20px
+		margin-right: 25px
+	.sidebar-group
+		li
+			a
+				i
+					display: none
+		.sidebar-link-addon
+			right: 25px

@@ -1,0 +1,29 @@
+﻿@model PersonalBookLibrary.MvcUI.Models.CategoryListViewModel
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kitap Listesi</h2>
+<div class="container-fluid">
+    <!-- Statistics panels -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <header class="panel-heading">Kitap Listesi</header>
+                <div class="panel-body">
+                    <div>
+                        @foreach (var category in Model.Categorys)
+                        {
+                            @category.CategoryName
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Statistics panels -->
+</div>
+

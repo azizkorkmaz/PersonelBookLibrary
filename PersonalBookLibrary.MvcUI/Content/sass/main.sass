@@ -1,0 +1,983 @@
+/* 
+ * TEMPLATE: Saltkin Responsive Admin Template
+ * AUTHOR: Karlo Mikuš
+ * www.karlomikus.com
+ *
+ * Table of contents:
+ * -----------------------
+ * 1. Default css styles
+ * 2. Typography
+ * 3. Forms and input
+ * 4. Layout
+ * 5. Sidebar
+ * 6. Compact sidebar
+ * 7. Right hand sidebar
+ * 8. Boxed layout
+ * 9. Header
+ * 10. Bootstrap overrides
+ * 11. Buttons
+ * 12. Components
+ * 13. Login page
+ * 14. Error page
+ * 15. Responsive styles
+ */
+
+// Imports
+@import colors
+@import vars
+@import mixins
+
+/* ------------------ 1. STYLES ------------------ */
+body
+	background: $colorMainBg
+	font-family: $fontMain
+
+/* ------------------ 2. TYPOGRAPHY ------------------ */
+a, a:hover, a:active, a:focus
+	outline: none
+
+a
+	color: $colorMediumGray
+	&:hover, &:active, &:focus
+		color: $colorMainAccentBlue
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+	font-family: $fontSec
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
+.h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small,
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small,
+.h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small
+	font-family: $fontMain
+
+img.chat-avatar
+	width: 24px
+	height: 24px
+	margin-right: 15px
+
+// Color variations
+.text-red
+	color: $colorRed
+.text-green
+	color: $colorMainAccentGreen
+.text-blue
+	color: $colorMainAccentBlue
+.text-orange
+	color: $colorOrange
+.text-purple
+	color: $colorPurple
+.text-yellow
+	color: $colorYellow
+
+.bg-dark
+	background: $colorMain !important
+.bg-red
+	background: $colorRed !important
+.bg-green
+	background: $colorMainAccentGreen !important
+.bg-blue
+	background: $colorMainAccentBlue !important
+.bg-orange
+	background: $colorOrange !important
+.bg-purple
+	background: $colorPurple !important
+.bg-yellow
+	background: $colorYellow !important
+.bg-shade
+	background: rgba(0,0,0,.3)
+
+/* ------------------ 3. FORMS AND INPUT ------------------ */
+.form-control
+	box-shadow: none
+	+noRadius
+	&:focus
+		box-shadow: none
+		color: $colorMain
+		background: lighten($colorMainBg, 4%)
+
+.has-success
+	.form-control
+		box-shadow: none
+		border-color: darken($colorMainAccentGreen, 20%)
+		&:focus
+			box-shadow: none
+			border-color: darken($colorMainAccentGreen, 30%)
+.has-success .help-block, .has-success .control-label,
+.has-success .radio, .has-success .checkbox, .has-success .radio-inline,
+.has-success .checkbox-inline
+	color: darken($colorMainAccentGreen, 20%)
+
+.has-warning
+	.form-control
+		box-shadow: none
+		border-color: $colorOrange
+		&:focus
+			box-shadow: none
+			border-color: $colorOrange
+.has-warning .help-block, .has-warning .control-label,
+.has-warning .radio, .has-warning .checkbox, .has-warning .radio-inline,
+.has-warning .checkbox-inline
+	color: $colorOrange
+
+.has-error
+	.form-control
+		box-shadow: none
+		border-color: $colorRed
+		&:focus
+			box-shadow: none
+			border-color: $colorRed
+.has-error .help-block, .has-error .control-label,
+.has-error .radio, .has-error .checkbox, .has-error .radio-inline,
+.has-error .checkbox-inline
+	color: $colorRed
+	
+
+label
+	font-family: $fontSec
+	font-weight: normal
+
+/* ------------------ 4. LAYOUT ------------------ */
+.page-container
+	padding-left: $sidebarWidth
+	position: relative
+	top: 0
+	bottom: 0
+	right: 0
+	left: 0
+	width: 100%
+	min-height: 1080px
+	+addAnimation
+
+.page-container:before, .page-container:after
+	content: " "
+	display: table
+
+.page-container:after
+	clear: both
+
+#sidebar
+	background: $colorMain
+	position: absolute
+	width: $sidebarWidth
+	bottom: 0
+	left: 0
+	top: 0
+	box-sizing: border-box
+	z-index: 1
+	+addAnimation
+
+#content
+	float: left
+	position: relative
+	width: 100%
+	box-sizing: border-box
+	+addAnimation
+
+/* ------------------ 5. SIDEBAR ------------------ */
+
+/* = SIDEBAR HEADER = */
+.sidebar-header
+	background: darken($colorMain, 5%)
+	overflow: hidden
+	height: $headerHeight
+	line-height: $headerHeight
+	h1
+		margin: 18px 0 0 20px
+		color: #fff
+		float: left
+		font-family: $fontSec
+		font-size: 26px
+	a
+		float: right
+		display: block
+		margin-right: 20px
+		font-size: 24px
+		color: #fff
+	#hide-menu
+		display: none
+
+/* == SIDEBAR NAVIGATION GROUPS == */
+.sidebar-group
+	list-style: none
+	margin: 10px 0
+	padding: 0
+	li
+		font-size: 12px
+		position: relative
+		line-height: 42px
+		&.sidebar-group-header
+			color: lighten($colorMain, 25%)
+			font-family: $fontSec
+			text-indent: 20px
+		a
+			font-size: 15px
+			font-weight: 400
+			display: block
+			color: lighten($colorMain, 48%)
+			padding: 0 20px
+			i
+				font-size: 20px
+				margin-right: 15px
+			&:hover, &:active
+				background: darken($colorMain, 5%)
+				box-shadow: inset 3px 0 0 $colorMainAccentGreen
+				text-decoration: none
+				color: #fff
+			&:focus
+				text-decoration: none
+				outline: none
+		&.active > a
+			color: #fff
+			background: darken($colorMain, 5%)
+			box-shadow: inset 3px 0 0 $colorMainAccentGreen
+		.sidebar-link-addon
+			color: #fff
+			position: absolute
+			right: 20px
+			top: 0
+			+addAnimation
+			i
+				font-size: 14px
+		&.has-submenu.active .sidebar-link-addon
+			-webkit-transform: rotate(-45deg)
+			-moz-transform: rotate(-45deg)
+			-ms-transform: rotate(-45deg)
+			-o-transform: rotate(-45deg)
+
+/* === SIDEBAR NAVIGATION SUBMENU === */
+.sidebar-submenu
+	list-style: none
+	background: darken($colorMain, 5%)
+	padding: 0
+	height: 0
+	display: none
+	box-shadow: inset 3px 0 0 $colorMainAccentGreen
+	li
+		text-indent: 20px
+		a
+			&:hover
+				background: darken($colorMain, 7%)
+				box-shadow: inset 3px 0 0 $colorMainAccentGreen
+.active .sidebar-submenu
+	height: auto
+	display: block
+
+/* = SIDEBAR PANEL = */
+.sidebar-panel
+	background: lighten($colorMain, 5%)
+	padding: 10px
+	margin: 20px
+	color: #fff
+	h4
+		margin: 0 0 10px 0
+	button
+		margin: 10px 0 0 0
+	p
+		margin: 0
+
+/* ------------------ 6. COMPACT SIDEBAR ------------------ */
+.compact-sidebar
+	.page-container
+		padding-left: $sidebarCompactWidth
+	#sidebar
+		width: $sidebarCompactWidth
+	.sidebar-header
+		h1
+			display: none
+	.sidebar-group
+		li
+			&.sidebar-group-header, .sidebar-link-addon
+				display: none
+			a
+				span
+					display: none
+	.sidebar-submenu
+		position: absolute
+		min-width: 250px
+		left: $sidebarCompactWidth
+		top: 0
+		li
+			text-indent: 0
+	.sidebar-panel
+		display: none
+
+/* ------------------ 7. RIGHT SIDE SIDEBAR ------------------ */
+.sidebar-right
+	.page-container
+		padding-right: $sidebarWidth
+		padding-left: 0
+	#sidebar
+		left: auto
+		right: 0
+	&.compact-sidebar
+		.page-container
+			padding-right: $sidebarCompactWidth
+
+/* ------------------ 8. BOXED LAYOUT ------------------ */
+.boxed-layout
+	background: darken($colorMainBg, 6%)
+	.page-container
+		background: $colorMainBg
+		width: 1200px !important
+		margin: 0 auto
+
+/* ------------------ 9. HEADER ------------------ */
+.header-site
+	background: #fff
+	height: $headerHeight
+	margin-bottom: 20px
+	.container-fluid
+		padding: 0
+
+/* = PAGE TITLE = */
+.page-title
+	margin-left: 25px
+	float: left
+	h4
+		color: $colorMain
+		margin: 15px 0 0 0
+		font-weight: 600
+		font-family: $fontMain
+	nav, a
+		font-size: 13px
+		color: $colorMediumGray
+	#toggle-menu
+		display: none
+		color: $colorMain
+		font-size: 20px
+		margin-right: 10px
+		&:hover, &:active, &:focus
+			color: $colorMainAccentBlue
+
+/* = HEADER NAVIGATION = */
+.header-nav
+	list-style: none
+	margin: 0
+	padding: 0
+	float: right
+	height: $headerHeight
+	> li
+		position: relative
+		display: block
+		float: left
+		> a
+			border-left: 1px solid darken($colorLightGray, 8%)
+			min-height: $headerHeight
+			min-width: 72px
+			text-align: center
+			line-height: $headerHeight - 5
+			padding: 0 20px
+			font-size: 24px
+			display: block
+			color: $colorMediumGray
+			&:hover
+				background: $colorLightGray
+		> .badge
+			position: absolute
+			top: 17px
+			right: 15px
+
+/* ------------------ 10. BOOTSTRAP OVERRIDES ------------------ */
+
+/* = Buttons = */
+.btn
+	border-width: 0
+	+noRadius
+
+.btn-default
+	background: $colorLightGray
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-default
+		background: darken($colorLightGray, 5%)
+.btn-primary
+	background: $colorMain
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-primary
+		background: darken($colorMain, 8%)
+.btn-success
+	background: $colorMainAccentGreen
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-success
+		background: darken($colorMainAccentGreen, 8%)
+.btn-danger
+	background: $colorRed
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-danger
+		background: darken($colorRed, 8%)
+.btn-warning
+	background: $colorOrange
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-warning
+		background: darken($colorOrange, 8%)
+.btn-info
+	background: $colorMainAccentBlue
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-info
+		background: darken($colorMainAccentBlue, 8%)
+.btn-purple
+	background: $colorPurple
+	color: #fff
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-purple
+		color: #fff
+		background: darken($colorPurple, 8%)
+.btn-yellow
+	background: $colorYellow
+	color: #fff
+	&:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-yellow
+		color: #fff
+		background: darken($colorYellow, 8%)
+
+/* = Badges = */
+.badge
+	background: $colorRed
+	color: #fff
+.badge-gray
+	background: $colorMediumGray
+
+/* = Panels = */
+.panel, .panel-heading
+	+noRadius
+
+.panel-heading
+	font-family: $fontSec
+
+.panel
+	border-color: $colorMain
+	border: 0
+	border-bottom: 3px solid $colorMain
+	.panel-heading
+		color: #fff
+		border-color: $colorMain
+		background: $colorMain	
+
+.panel-minimal
+	border: 0
+	.panel-heading
+		background: none
+		border: 0
+		border-top: 3px solid $colorMediumGray
+		color: $colorMediumGray
+
+.panel-boxed
+	border: 2px solid $colorMain
+	.panel-heading
+		background: $colorMain
+		font-size: 24px
+		font-weight: 300
+		font-family: $fontMain
+		border: 0
+
+.panel-default
+	border: 0
+	.panel-heading
+		border: 0
+		background: none
+		color: $colorMain
+		font-size: 24px
+		font-weight: 300
+		font-family: $fontMain
+	.panel-footer
+		border: 0
+		background: $colorLightGray
+
+.panel-inverse, .panel-inverse .panel-heading
+	color: #fff
+
+.panel-boxed.panel-red
+	border-color: $colorRed
+	.panel-heading
+		border-color: $colorRed
+		background-color: $colorRed
+.panel-boxed.panel-blue
+	border-color: $colorMainAccentBlue
+	.panel-heading
+		border-color: $colorMainAccentBlue
+		background-color: $colorMainAccentBlue
+.panel-boxed.panel-green
+	border-color: $colorMainAccentGreen
+	.panel-heading
+		border-color: $colorMainAccentGreen
+		background-color: $colorMainAccentGreen
+.panel-boxed.panel-orange
+	border-color: $colorOrange
+	.panel-heading
+		border-color: $colorOrange
+		background-color: $colorOrange
+.panel-boxed.panel-purple
+	border-color: $colorPurple
+	.panel-heading
+		border-color: $colorPurple
+		background-color: $colorPurple
+
+.panel-minimal.panel-red
+	.panel-heading
+		border-color: $colorRed
+		color: $colorRed
+.panel-minimal.panel-blue
+	.panel-heading
+		border-color: $colorMainAccentBlue
+		color: $colorMainAccentBlue
+.panel-minimal.panel-green
+	.panel-heading
+		border-color: $colorMainAccentGreen
+		color: $colorMainAccentGreen
+.panel-minimal.panel-orange
+	.panel-heading
+		border-color: $colorOrange
+		color: $colorOrange
+.panel-minimal.panel-purple
+	.panel-heading
+		border-color: $colorPurple
+		color: $colorPurple
+
+/* = Dropdowns = */
+.dropdown-arrow:before
+	border-bottom: 8px solid $colorDropdownHeader
+	border-left: 8px solid transparent
+	border-right: 8px solid transparent
+	content: ""
+	display: inline-block
+	right: 27px
+	position: absolute
+	top: -7px
+
+.dropdown-menu
+	+noRadius
+	border: 0
+	background: darken($colorMain, 5%)
+	margin: 0
+	> li
+		> a
+			color: lighten($colorMain, 48%)
+			padding: 5px 20px
+			&:hover, &:active, &:focus
+				color: #fff
+				background: darken($colorMain, 9%)
+	.divider
+		background-color: darken($colorMain, 9%)
+
+.bootstrap-datetimepicker-widget.dropdown-menu
+	background: #fff !important
+
+/* = Progress bar = */
+.progress
+	+noRadius
+	height: 10px
+	&.progress-lg
+		height: 20px
+	.progress-bar
+		background: $colorMain
+		&.progress-bar-success
+			background-color: $colorMainAccentGreen
+		&.progress-bar-info
+			background-color: $colorMainAccentBlue
+		&.progress-bar-warning
+			background-color: $colorOrange
+		&.progress-bar-danger
+			background-color: $colorRed
+
+/* = Pills navigation = */
+.nav-pills > li > a
+	+noRadius
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus
+	background: $colorMainAccentBlue
+.nav-pills.nav-green > li.active > a, .nav-pills.nav-green > li.active > a:hover, .nav-pills.nav-green > li.active > a:focus
+	background: $colorMainAccentGreen
+
+/* = Modals = */
+.modal-content
+	border: 0
+	+noRadius
+	.modal-header, .modal-footer
+		background: $colorLightGray
+
+/* = Alerts = */
+.alert
+	+noRadius
+	border: 0
+	border-left: 3px solid #000
+	&.alert-success
+		border-color: $colorMainAccentGreen
+		background: lighten($colorMainAccentGreen, 30%)
+	&.alert-danger
+		border-color: $colorRed
+		background: lighten($colorRed, 25%)
+	&.alert-info
+		border-color: $colorMainAccentBlue
+		background: lighten($colorMainAccentBlue, 30%)
+	&.alert-warning
+		border-color: $colorOrange
+		background: lighten($colorOrange, 30%)
+
+/* = Pagination = */
+.pagination
+	+noRadius
+	& > li:first-child > a, & > li:first-child > span,
+	& > li:last-child > a, & > li:last-child > span
+		border-bottom-left-radius: 0
+		border-top-left-radius: 0
+		border-bottom-right-radius: 0
+		border-top-right-radius: 0
+	& > li > a, & > li > span
+		background: $colorMain
+		color: #fff
+		border: 0
+	& > .active > a, & > .active > span, & > .active > a:hover,
+	& > .active > span:hover, & > .active > a:focus, & > .active > span:focus
+		background: $colorMainAccentGreen
+	& > li > a:hover, & > li > span:hover, & > li > a:focus, & > li > span:focus
+		background: darken($colorMain, 10%)
+		color: #fff
+
+.pager li > a, .pager li > span
+	border-width: 2px
+.pager li > a:hover, .pager li > a:focus
+	background: $colorMainAccentBlue
+	border-color: $colorMain
+	color: #fff
+
+/* = Tabs = */
+.nav-tabs > li > a
+	+noRadius
+.nav > li > a:hover, .nav > li > a:focus
+	background: $colorMainAccentBlue
+	color: #fff
+	border-color: $colorMainAccentBlue
+
+.nav.nav-green > li > a:hover, .nav.nav-green > li > a:focus
+	background: $colorMainAccentGreen
+	color: #fff
+	border-color: $colorMainAccentGreen
+
+/* ------------------ 11. BUTTONS ------------------ */
+
+.no-margin
+	margin: 0 !important
+	
+/* ------------------ 12. COMPONENTS ------------------ */
+
+/* = Notifications = */
+.panel-notifications
+	border: 0
+	padding: 0
+	margin: 0
+	min-width: 220px
+	box-shadow: 0 4px 6px lighten(#000, 80%)
+	background: #fff
+	.panel-heading
+		background: $colorDropdownHeader
+		border: 0
+	.panel-body
+		padding: 0
+		ul
+			list-style: none
+			margin: 0
+			padding: 0
+			li
+				a
+					display: block
+					border-bottom: 1px solid lighten($colorMediumGray, 30%)
+					padding: 10px 15px
+					.typcn
+						color: #fff
+						font-size: 18px
+						margin-right: 5px
+						padding: 0 5px 3px 5px
+					&:hover, &:active, &:focus
+						background: $colorLightGray
+
+/* = Messages dropdown = */
+.panel-messages
+	border: 0
+	padding: 0
+	min-width: 300px
+	background: #fff
+	box-shadow: 0 4px 6px lighten(#000, 80%)
+	.panel-heading
+		background: $colorDropdownHeader
+		border: 0
+	.panel-body
+		padding: 0
+		ul
+			list-style: none
+			margin: 0
+			padding: 0
+			li
+				&.left .chat-body
+					margin-left: 60px
+				&.right .chat-body
+					margin-right: 60px
+				.chat-body
+					p
+						padding: 0
+					.glyphicon
+						margin-right: 5px
+				a
+					display: block
+					padding: 10px
+					color: #333
+					border-bottom: 1px solid lighten($colorMediumGray, 30%)
+					&:hover
+						background: $colorMainAccentBlue
+						color: #fff
+						text-decoration: none
+						small
+							color: lighten($colorMainAccentBlue, 30%)
+	.panel-footer
+		border: 0
+
+
+/* = Status panels = */
+.panel-status
+	border: 0
+	.panel-heading
+		background: none
+		border: 0
+		margin-bottom: 5px
+		h3
+			color: $colorMain
+			margin: 0
+			font-weight: 300
+			font-family: $fontMain
+	.panel-body
+		text-align: center
+		line-height: 50px
+		font-size: 48px
+		.total-tasks
+			font-size: 18px
+			color: $colorMediumGray
+	.panel-footer
+		background: $colorLightGray
+		border: 0
+		margin-top: 20px
+		padding: 0
+		ul
+			list-style: none
+			margin: 0
+			padding: 0
+			li
+				width: 50%
+				text-align: center
+				a
+					font-family: $fontSec
+					font-size: 16px
+					color: $colorMediumGray
+					display: block
+					padding: 12px 0
+					&:hover
+						text-decoration: none
+						background: darken($colorLightGray, 4%)
+
+/* = Statistics panel = */
+.panel-stat
+	border: 0
+	.panel-body
+		.stat-icon
+			padding: 2px 10px 7px 10px
+			color: #fff
+			font-size: 28px
+		h4
+			margin: 0 0 0 15px
+			font-size: 22px
+			line-height: 22px
+			small
+				font-size: 12px
+		span
+			font-size: 32px
+	.panel-footer
+		border-top: 1px solid $colorMainBg
+		background: none
+		text-align: center
+		padding: 20px 0 0 0
+	&.panel-alt
+		color: #fff
+		small
+			color: rgba(255,255,255,.6)
+
+/* = Tasks = */
+.panel-tasks
+	border: 0
+	.panel-heading
+		border: 0
+		font-size: 24px
+		font-family: $fontMain
+		font-weight: 300
+	.panel-body
+		margin: 0
+		padding: 0
+		list-style: none
+		li
+			position: relative
+			input
+				position: absolute
+				right: 15px
+				top: 15px
+			a
+				padding: 13px 20px
+				display: block
+				color: #333
+				border-left: 3px solid $colorMediumGray
+				font-size: 16px
+				&.priority-high
+					border-color: $colorRed
+				&.priority-low
+					border-color: $colorMainAccentBlue
+				&.priority-medium
+					border-color: $colorYellow
+				&.priority-delayed
+					border-color: $colorPurple
+				&:hover
+					text-decoration: none
+					background: $colorLightGray
+			&.task-done a
+				text-decoration: line-through
+			.current-task
+				color: #fff
+				border: 0
+
+/* = Analytics = */
+.panel-analytics
+	border: 0
+	.panel-heading
+		border: 0
+		background: none
+		color: $colorMain
+		font-weight: 300
+		font-family: $fontMain
+		font-size: 24px
+	.panel-body
+		padding: 0
+		.analytics-info
+			margin-bottom: 20px
+			padding: 0 20px
+
+.stock-info
+	h1
+		margin: 0
+		font-family: $fontMain
+		i
+			font-size: 16px
+
+/* = Chat = */
+.panel-chat
+	.chat
+		list-style: none
+		margin: 0
+		padding: 0
+		li
+			margin-bottom: 10px
+			padding-bottom: 5px
+			border-bottom: 1px solid lighten($colorMediumGray, 30%)
+			&.left .chat-body
+				margin-left: 60px
+			&.right .chat-body
+				margin-right: 60px
+			.chat-body
+				p
+					padding: 0
+				.glyphicon
+					margin-right: 5px
+	.panel-body
+		overflow-y: scroll
+		height: 300px
+
+/* = Reminder panel = */
+.panel-reminder
+	background: $colorMainAccentBlue
+	color: #fff
+	.panel-heading
+		color: #fff
+	.icon-bg
+		position: absolute
+		top: -25px
+		right: 15px
+		font-size: 9em
+		color: rgba(255,255,255,.3)
+
+/* = Email = */
+.mail-list
+	list-style: none
+	margin: 10px 0 0 0
+	padding: 0
+	li
+		border-bottom: 1px solid $colorLightGray
+		a
+			display: block
+			padding: 10px 15px
+			&:hover
+				text-decoration: none
+				background: $colorMain
+				color: #fff
+
+/* = Scrollbar = */
+.scrollbox 
+	overflow: auto
+	width: 368px
+	height: 200px
+
+.scrollbar-track
+	width: 10px
+	background: rgba(0, 0, 0, 0)
+	margin-right: 2px
+	border-radius: 10px
+	-webkit-transition: background 250ms linear
+	transition: background 250ms linear
+
+.scrollbar-track:hover,
+.scrollbar-track.dragging
+	background: #d9d9d9
+	background: rgba(0, 0, 0, 0.15)
+
+.scrollbar-handle
+	width: 7px
+	right: 0
+	background: #999
+	background: rgba(0, 0, 0, 0.4)
+	border-radius: 7px
+	-webkit-transition: width 250ms
+	transition: width 250ms
+
+.scrollbar-track:hover .scrollbar-handle,
+.scrollbar-track.dragging .scrollbar-handle
+	width: 10px
+
+/* = Multi level dropdown menu color = */
+.dl-menuwrapper button
+	background: $colorMain
+
+.dl-menuwrapper button:hover,
+.dl-menuwrapper button.dl-active,
+.dl-menuwrapper ul
+	background: darken($colorMain, 5%)
+
+/* ------------------ 13. LOGIN PAGE ------------------ */
+.login-page
+	background: $colorMain
+	.container
+		color: #fff
+		padding: 200px 0
+	.login-buttons
+		text-align: center
+		strong
+			margin: 0 10px
+
+.btn-login
+	font-family: $fontSec
+	font-size: 18px
+	border: 3px solid #fff
+	background: $colorMain
+	color: #fff
+	padding: 20px 100px
+	&:hover, &:active, &:focus
+		color: #fff
+		background: lighten($colorMain, 5%)
+
+/* ------------------ 14. ERROR PAGE ------------------ */
+.error-page
+	background: $colorMain
+	.container
+		color: #fff
+		padding: 200px 0
+		h1
+			font-size: 64px
+			i
+				font-size: 48px
+	a
+		color: lighten($colorMain, 30%)
+
+/* ------------------ 15. RESPONSIVE STYLES ------------------ */
+@import responsive
