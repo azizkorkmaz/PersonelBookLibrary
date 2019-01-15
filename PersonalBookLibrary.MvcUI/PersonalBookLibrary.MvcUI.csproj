@@ -175,6 +175,13 @@
     <Content Include="Content\img\loaders\loader8.gif" />
     <Content Include="Content\img\loaders\loader9.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\js\jquery\ai.0.22.9-build00167.js" />
+    <Content Include="Content\js\jquery\ai.0.22.9-build00167.min.js" />
+    <None Include="Content\js\jquery\jquery-1.8.0.intellisense.js" />
+    <Content Include="Content\js\jquery\jquery-1.8.0.js" />
+    <Content Include="Content\js\jquery\jquery-1.8.0.min.js" />
+    <Content Include="Content\js\jquery\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\js\jquery\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\page-bootstrap.js" />
     <Content Include="Content\js\page-calendar.js" />
@@ -219,7 +226,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoryListViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +238,6 @@
     <Content Include="log4net.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
@@ -246,6 +252,10 @@
     <Content Include="Content\sass\_vars.sass" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\GetList.cshtml" />
+    <Content Include="Views\Category\Insert.cshtml" />
+    <Content Include="Views\Category\Detail.cshtml" />
+    <Content Include="Views\Category\Update.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

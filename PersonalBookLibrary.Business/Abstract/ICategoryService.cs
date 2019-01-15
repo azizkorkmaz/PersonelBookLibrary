@@ -8,25 +8,18 @@ using System.Threading.Tasks;
 
 namespace PersonalBookLibrary.Business.Abstract
 {
-    [ServiceContract]
     public interface ICategoryService
     {
-        [OperationContract]
         List<Category> GetAll();
-
-        [OperationContract]
+        
         Category GetById(int id);
 
-        [OperationContract]
         Category Add(Category category);
 
-        [OperationContract]
         Category Update(Category category);
 
-        [OperationContract]
-        void Delete(Category category);
+        Category Delete(Category category);
 
-        [OperationContract]
         void TransactionalOperation(Category category1, Category category2);
     }
 }

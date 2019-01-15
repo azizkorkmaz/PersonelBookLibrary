@@ -10,7 +10,7 @@ using PersonalBookLibrary.Business.DependencyResolvers.Ninject;
 /// <summary>
 /// Summary description for CategoryDetailService
 /// </summary>
-public class CategoryDetailService:ICategoryDetailService
+public class CategoryDetailService:ICategoryDetailServiceWcf
 {
     /*burada sistemin tamamını servislere bağlı olarak değilde bir kısmını dış dünyaya açamak için uygaldığımız yöntem.*/
     PersonalBookLibrary.Business.Abstract.ICategoryService _categoryServiceWcf = InstanceFactory.GetInstance<PersonalBookLibrary.Business.Abstract.ICategoryService>();

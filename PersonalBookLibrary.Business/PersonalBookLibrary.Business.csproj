@@ -113,8 +113,8 @@
     <Compile Include="DependencyResolvers\Ninject\ValidationModule.cs" />
     <Compile Include="Mappings\AutoMapper\Profiles\BusinessProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceContracts\Wcf\ICategoryDetailService.cs" />
-    <Compile Include="ServiceContracts\Wcf\ICategoryService.cs" />
+    <Compile Include="ServiceContracts\Wcf\ICategoryDetailServiceWcf.cs" />
+    <Compile Include="ServiceContracts\Wcf\ICategoryServiceWcf.cs" />
     <Compile Include="ValidationRules\FluentValidation\CategoryValidator.cs" />
   </ItemGroup>
   <ItemGroup>

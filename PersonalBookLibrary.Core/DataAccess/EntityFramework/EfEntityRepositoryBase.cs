@@ -25,13 +25,14 @@ namespace PersonalBookLibrary.Core.DataAccess.EntityFramework
            
         }
 
-        public void Delete(TEntity entity)
+        public TEntity Delete(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var deleteEntity = context.Entry(entity);
                 deleteEntity.State = EntityState.Deleted;
                 context.SaveChanges();
+                return entity;
             }
         }
 

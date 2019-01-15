@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PersonalBookLibrary.Business.ServiceContracts.Wcf
 {
     [ServiceContract]
-    public interface ICategoryService
+    public interface ICategoryServiceWcf
     {
         [OperationContract]
         List<Category> GetAll();

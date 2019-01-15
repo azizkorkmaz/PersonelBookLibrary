@@ -9,7 +9,7 @@ using PersonalBookLibrary.Business.DependencyResolvers.Ninject;
 /// <summary>
 /// Summary description for CategoryService
 /// </summary>
-public class CategoryService:ICategoryService
+public class CategoryService:ICategoryServiceWcf
 {
     public CategoryService()
     {
@@ -18,8 +18,8 @@ public class CategoryService:ICategoryService
         //
     }
 
-    private ICategoryService _categoryServiceWcf = 
-        InstanceFactory.GetInstance<ICategoryService>();
+    private ICategoryServiceWcf _categoryServiceWcf = 
+        InstanceFactory.GetInstance<ICategoryServiceWcf>();
 
 
     public Category Add(Category category)

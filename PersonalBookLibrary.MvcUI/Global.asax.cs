@@ -30,7 +30,7 @@ namespace PersonalBookLibrary.MvcUI
              * Eğerki busines üzerinden çağırırsak programı businessModule vermek zorundayız.*/
             ControllerBuilder.Current.SetControllerFactory(
                 new NinjectControllerFactory(
-                    new ServiceModule(), new AutoMapperModule()));
+                    new BusinessModule(), new AutoMapperModule()));
         }
 
         /*Authenticantion için yaptığımız çalışmalar. 

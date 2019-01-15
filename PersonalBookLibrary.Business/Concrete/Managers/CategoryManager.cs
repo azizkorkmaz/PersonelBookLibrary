@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using PersonalBookLibrary.Entities.Concrete;
 using PersonalBookLibrary.DataAccess.Abstract;
 using PersonalBookLibrary.Business.ValidationRules.FluentValidation;
-using System.Transactions;
 using PersonalBookLibrary.Core.Aspects.Postsharp.VlidationAspects;
 using PersonalBookLibrary.Core.Aspects.Postsharp.TransactionAspects;
 using PersonalBookLibrary.Core.Aspects.Postsharp.CacheAspects;
 using PersonalBookLibrary.Core.CrossCuttingConcerns.Caching.Microsoft;
-using PersonalBookLibrary.Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
-using PersonalBookLibrary.Core.Aspects.Postsharp.LogAspects;
 using PersonalBookLibrary.Core.Aspects.Postsharp.PerformanceAspects;
-using System.Threading;
-using PersonalBookLibrary.Core.Aspects.Postsharp.AuthorizationAspects;
 using AutoMapper;
-using PersonalBookLibrary.Core.Utilities.Mappings;
-using System;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
-    public class CategoryManager : ICategoryService
+    public class CategoryManager :ICategoryService
     {
         /*burada veri erişim katmanı kulanarak işlemleri gerçekleştirecez.*/
         private ICategoryDal _categoryDal;
@@ -37,7 +30,9 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         {
             /* Burada validate yapmamız doğru değil Solid e uygun değil. Bu kodu aspect şeklinde yazacağız.*/
             //ValidatorTool.FluentValidate(new CategoryValidator(), category);
-            return _categoryDal.Add(category);
+
+            var categoryAdd = _mapper.Map<Category, Category>(_categoryDal.Add(category));
+            return categoryAdd;
         }
 
         [CacheAspect(typeof(MemoryCacheManager))]
@@ -61,13 +56,16 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
         public Category GetById(int id)
         {
-            return _categoryDal.Get(c => c.CategoryId == id);
+            var category = _mapper.Map<Category, Category>(_categoryDal.Get(c => c.CategoryId == id));
+            return category;
         }
 
         [FluentValidationAspect(typeof(CategoryValidator))]
         public Category Update(Category category)
         {
-            return _categoryDal.Update(category);
+            var categoryUpdate = _mapper.Map<Category, Category>(_categoryDal.Update(category));
+            /*Burada LastUpdate ,updateUser ve UpdateDate propertyleri ayarla.*/
+            return categoryUpdate;
         }
 
         [TransactionScopeAspect]
@@ -93,9 +91,11 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             _categoryDal.Update(category2);
         }
 
-        public void Delete(Category category)
+        public Category Delete(Category category)
         {
-            _categoryDal.Delete(category);
+            var categoryDelete = _mapper.Map<Category, Category>(_categoryDal.Delete(category));
+            categoryDelete.Status = false;
+            return categoryDelete;
         }
     }
 }

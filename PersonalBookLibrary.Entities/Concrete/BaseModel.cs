@@ -18,7 +18,7 @@ namespace PersonalBookLibrary.Entities.Concrete
 
         public string UpdateUser { get; set; }
 
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
     }
 }
