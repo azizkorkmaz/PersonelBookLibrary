@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComplexTypes\BookDetail.cs" />
-    <Compile Include="ComplexTypes\UserRoleItem.cs" />
+    <Compile Include="ComplexTypes\UserRoleDetail.cs" />
+    <Compile Include="ComplexTypes\UserRolesList.cs" />
     <Compile Include="Concrete\BaseModel.cs" />
     <Compile Include="Concrete\Book.cs" />
     <Compile Include="Concrete\Category.cs" />

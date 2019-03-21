@@ -1,0 +1,130 @@
+﻿
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.UserRolesViewModel
+
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var insertAjaxOptions = new AjaxOptions
+    {
+        AllowCache = false, /*cache alıp almamasını belirliyoruz*/
+        Url = Url.Action("Insert"),//gitmesini istedeğimiz adres
+        HttpMethod = "post",//metodu belirliyoruz
+        UpdateTargetId = "Users",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
+        LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
+        LoadingElementDuration = 500//progress nesnesinin görünme süresini belirtiyoruz
+    };
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kullanıcı Ekle</header>
+                        <div class="panel-body">
+                            <div id="progress" class="progress" style="display: none;">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width: 100%"></div>
+                            </div>
+                            @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
+                            @using (Ajax.BeginForm(insertAjaxOptions))
+                            {
+                                <div class="form-group">
+                                    <label>Kullanıcı Adı</label>
+
+                                    @Html.TextBoxFor(t => t.User.UserName, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail</label>
+
+                                    @Html.TextBoxFor(t => t.User.Email, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Adı</label>
+
+                                    @Html.TextBoxFor(t => t.User.FirstName, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Soyadı</label>
+
+                                    @Html.TextBoxFor(t => t.User.LastName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Şifre</label>
+
+                                    @Html.TextBoxFor(t => t.User.Password, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kullanıcı Rolü</label>
+
+                                    @Html.DropDownListFor(t => t.UserRoleIds, new MultiSelectList(Model.Roles, "RoleId", "RoleName"), new { @multiple = true, @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Durumu
+                                        @Html.CheckBoxFor(t => t.User.Status, new { @class = "form-control" })
+                                    </label>
+                                </div>
+                                <a href="@Url.Action("Index","Home")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+                                <button class="btn btn-primary pull-right">Ekle</button>
+                                <p>@ViewBag.message</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+            <!-- Modal -->
+            @if (ViewBag.message != null)
+            {
+                <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalMessage">Bilgi Mesajı!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p style="color:red">@ViewBag.message</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $('#modalMessage').modal('show');
+                </script>
+            }
+            <!-- /Modal -->
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

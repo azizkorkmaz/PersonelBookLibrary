@@ -11,8 +11,9 @@
         .btn {
             border-radius: 5px 5px;
         }
-        .label{
-            font-size:14px;
+
+        .label {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -62,7 +63,6 @@
                                                 }
 
                                                 <td>@category.InsertUser</td>
-
                                                 <td><a href="@Url.Action("Update","Category",new {category=Model.Categories.ToList(), id=category.CategoryId})" class="btn btn-success" type="button">Güncelle</a></td>
                                                 <td><a href="@Url.Action("Detail","Category",new {category = Model.Categories.ToList(), id=category.CategoryId})" class="btn btn-info" type="button">Detay</a></td>
                                                 <td><a href="@Url.Action("Delete","Category",new {category = Model.Categories.ToList(), id=category.CategoryId})" class="btn btn-danger" type="button">Sil</a></td>

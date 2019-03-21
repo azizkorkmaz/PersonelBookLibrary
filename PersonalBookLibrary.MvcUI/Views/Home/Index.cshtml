@@ -1,8 +1,116 @@
-﻿
+﻿@model PersonalBookLibrary.MvcUI.Models.ComplexType.BookCategoryViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
 }
 
-<h2>Index</h2>
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+        }
 
+        .label {
+            font-size: 14px;
+        }
+        .table{
+            text-align:justify;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kütüphanemde ki Mevcut Kitaplar</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table footable table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sıra</th>
+                                            <th data-toggle="true">Adı</th>
+                                            <th>Kategori</th>
+                                            <th>Yazar Adı</th>
+                                            <th>Yayın Evi</th>
+                                            <th>Basım Saysı</th>
+                                            <th>Özet</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var bookDetail in Model.BookDetailList)
+                                        {
+                                            foreach (var book in bookDetail)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>
+                                                        @book.BookName
+                                                    </td>
+                                                    <td>
+                                                        @book.CategoryName
+                                                    </td>
+                                                    <td>@book.AuthorName</td>
+                                                    <td>@book.PublisherName</td>
+                                                    <td>@book.Edition</td>
+                                                    <td><button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bookSummaryModalLong">Kitap Özeti</button></td>
+                                                </tr>
+                                            }
+
+                                            i++;
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="bookSummaryModalLong" tabindex="-1" role="dialog" aria-labelledby="bookSummaryModalTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="bookSummaryModalTitle">@Model.BookDetail.BookName özeti</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if (Model.BookDetail.BookSummary != null)
+                            {
+                                @Model.BookDetail.BookSummary
+                            }
+                            else
+                            {
+                                <p style="color:red">Kitap özeti eklenmemiştir!</p>
+                            }
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

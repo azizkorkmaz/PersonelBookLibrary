@@ -18,6 +18,8 @@ namespace PersonalBookLibrary.Core.DataAccess
 
         T Update(T entity);
 
-        T Delete(T entity);
+        T LooseDelete(T entity);
+
+        void HardDelete(T entity);
     }
 }

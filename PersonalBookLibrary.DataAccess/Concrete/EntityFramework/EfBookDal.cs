@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PersonalBookLibrary.Entities.ComplexType;
+using PersonalBookLibrary.Entities.ComplexTypes;
 
 namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
 {
@@ -20,7 +20,22 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
                              join c in context.Categories
                              on b.CategoryID equals c.CategoryId
                              where b.CategoryID == book.CategoryID
-                             select new BookDetail { BookName = c.CategoryName };
+                             select new BookDetail
+                             {
+                                 CategoryName = c.CategoryName,
+                                 AuthorName = b.AuthorName,
+                                 BookID = b.BookId,
+                                 BookName = b.BookName,
+                                 BookSummary = b.BookSummary,
+                                 Edition = b.Edition,
+                                 PublisherName = b.PublisherName,
+                                 InsertDate = b.InsertDate,
+                                 InsertUser = b.InsertUser,
+                                 UpdateDate = b.UpdateDate,
+                                 UpdateUser = b.UpdateUser,
+                                 LastUpdated = b.LastUpdated,
+                                 Status = b.Status
+                             };
                 return result.ToList();
             }
         }

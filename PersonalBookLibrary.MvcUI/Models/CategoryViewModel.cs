@@ -10,5 +10,6 @@ namespace PersonalBookLibrary.MvcUI.Models
     {
         public List<Category> Categories { get; set; }
         public Category Category { get; set; }
+        public string Message { get; set; }
     }
 }

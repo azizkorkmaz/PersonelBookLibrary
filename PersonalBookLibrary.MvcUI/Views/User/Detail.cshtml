@@ -1,0 +1,131 @@
+﻿@model PersonalBookLibrary.MvcUI.Models.ComplexType.UserRolesViewModel
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .table {
+            text-align: center;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kullanıcı Detay</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Kullanıcı Adı</th>
+                                            <th>Adı</th>
+                                            <th>Soyadı</th>
+                                            <th>E-mail</th>
+                                            <th>Roller</th>
+                                            <th>Durumu</th>
+                                            <th>Ekleyen Kullanıcı</th>
+                                            <th>Ekleme Tarihi</th>
+                                            <th>Güncelleme Durumu</th>
+                                            <th class="gk">Güncelleyen Kullanıcı</th>
+                                            <th class="gt">Güncelleme Tarihi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Model.User.UserId</td>
+                                            <td>@Model.User.UserName</td>
+                                            <td>@Model.User.FirstName</td>
+                                            <td>@Model.User.LastName</td>
+                                            <td>@Model.User.Email</td>
+                                            <td>
+                                                @{
+                                                    var roles = "";
+                                                    foreach (var rol in Model.UserRoleDetails)
+                                                    {
+                                                        roles = roles + rol.RoleName + ", ";
+                                                    }
+                                                    roles = roles.Substring(0, roles.Length - 2);
+                                                }
+                                                <p>@roles</p>
+                                            </td>
+
+
+                                            @if (Model.User.Status)
+                                            {
+                                                <td><span class="label label-success">Aktif</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Pasif</span></td>
+                                            }
+                                            <td>@Model.User.InsertUser</td>
+                                            <td>@Model.User.InsertDate</td>
+
+                                            @if (Model.User.LastUpdated)
+                                            {
+                                                <td><span class="label label-success">Evet</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Hayır</span></td>
+                                            }
+
+                                            @if (Model.User.LastUpdated)
+                                            {
+                                                <td>@Model.User.UpdateUser</td>
+                                            }
+                                            else
+                                            {
+
+                                            }
+
+                                            @if (Model.User.LastUpdated)
+                                            {
+                                                <td>@Model.User.UpdateDate</td>
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("GetList","User")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

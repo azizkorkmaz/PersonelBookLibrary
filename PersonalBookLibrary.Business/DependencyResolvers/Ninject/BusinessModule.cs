@@ -20,8 +20,19 @@ namespace PersonalBookLibrary.Business.DependencyResolvers.Ninject
             Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
             Bind<ICategoryDal>().To<EfCategoryDal>().InSingletonScope();
 
-            Bind<IUserService>().To<UserManager>();
-            Bind<IUserDal>().To<EfUserDal>();
+            Bind<IUserService>().To<UserManager>().InSingletonScope();
+            Bind<IUserDal>().To<EfUserDal>().InSingletonScope();
+
+            Bind<IRoleService>().To<RoleManager>().InSingletonScope();
+            Bind<IRoleDal>().To<EfRoleDal>().InSingletonScope();
+
+            Bind<IUserRoleService>().To<UserRoleManager>().InSingletonScope();
+            Bind<IUserRoleDal>().To<EfUserRoleDal>().InSingletonScope();
+
+            Bind<IBookService>().To<BookManager>().InSingletonScope();
+            Bind<IBookDal>().To<EfBookDal>().InSingletonScope();
+
+            Bind<IUserRolesTransactionService>().To<UserRolesTransactionManager>().InSingletonScope();
 
         }
     }

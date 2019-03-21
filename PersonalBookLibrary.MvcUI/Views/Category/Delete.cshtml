@@ -24,6 +24,10 @@
             border-radius: 5px 5px;
             margin-right: 5px;
         }
+
+        .label {
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -68,7 +72,43 @@
                                     <label>Ekleme Tarihi</label>
                                     @Html.TextBoxFor(t => t.Category.InsertDate, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
+                                
+                                <div class="form-group">
+                                    
+                                    @if (Model.Category.LastUpdated)
+                                    {
+                                        <label>Güncellendi mi</label>
+                                        @Html.TextBoxFor(t => t.Category.LastUpdated, new { @class = "form-control", @readonly = "readonly" })
+                                    }
+                                </div>
 
+                                <div class="form-group">
+                                    
+                                    @if (Model.Category.LastUpdated)
+                                    {
+                                        <label>Güncelleyen Kullanıcı</label>
+                                        @Html.TextBoxFor(t => t.Category.UpdateUser, new { @class = "form-control", @readonly = "readonly" })
+                                    }
+                                </div>
+
+                                <div class="form-group">
+                                    
+                                    @if (Model.Category.LastUpdated)
+                                    {
+                                        <label>Güncelleme Tarihi</label>
+                                        @Html.TextBoxFor(t => t.Category.UpdateDate, new { @class = "form-control", @readonly = "readonly" })
+                                    }
+                                </div>
+
+
+                                <div>
+                                    <label>Durumu</label>
+                                    @if (Model.Category.Status)
+                                    {
+                                        @Html.TextBoxFor(t => t.Category.Status, new { @class = "form-control", @readonly = "readonly" })
+                                    }
+
+                                </div>
                                 <div>
                                     <a href="@Url.Action("GetList","Category")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
 

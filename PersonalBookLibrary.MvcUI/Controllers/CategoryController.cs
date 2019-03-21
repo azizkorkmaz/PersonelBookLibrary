@@ -12,12 +12,10 @@ namespace PersonalBookLibrary.MvcUI.Controllers
     public class CategoryController : Controller
     {
         private ICategoryService _categoryService;
-        private Category _category;
 
-        public CategoryController(ICategoryService categoryService, Category category)
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            _category = category;
         }
 
         public ActionResult GetList()
@@ -29,23 +27,24 @@ namespace PersonalBookLibrary.MvcUI.Controllers
             return View(model);
         }
 
+        public ActionResult Insert()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Insert(Category category)
         {
-            category.InsertDate = DateTime.Now.ToLocalTime();
-            category.InsertUser = "Aziz";
-            category.LastUpdated = false;
-            category.Status = true;
+            var model = new CategoryViewModel
+            {
+                Category = _categoryService.Add(category)
+            };
 
-            _categoryService.Add(category);
-
-            return RedirectToAction("GetList");
+            return RedirectToAction("GetList", "Category");
         }
 
         public ActionResult Detail(int id)
         {
-
             var model = new CategoryViewModel
             {
                 Category = _categoryService.GetById(id)
@@ -66,9 +65,6 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         [HttpPost]
         public ActionResult Update(Category category)
         {
-            category.LastUpdated = true;
-            category.UpdateUser = "Aziz";
-            category.UpdateDate = DateTime.Now.ToLocalTime();
             var model = _categoryService.Update(category);
 
             return RedirectToAction("GetList");
@@ -87,7 +83,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         [HttpPost]
         public ActionResult Delete(Category category)
         {
-            var model = _categoryService.Update(category);
+            var model = _categoryService.LooseDelete(category);
 
             return RedirectToAction("GetList");
         }

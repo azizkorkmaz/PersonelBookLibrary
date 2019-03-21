@@ -15,7 +15,7 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
             expiration, string[] roles, bool rememberMe, string firstName, string lastName)
         {
             var authTicket = new FormsAuthenticationTicket(1, userName, DateTime.Now, expiration,
-                rememberMe, CreateAuthTags(email, roles, firstName, lastName, id));
+                rememberMe, CreateAuthTags(email, roles,userName, firstName, lastName, id));
 
             string encTicket = FormsAuthentication.Encrypt(authTicket);
 
@@ -26,7 +26,7 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
 
         /*Burada FormsAuthentication yaptığımız için bizden bir userData istiyor.
          *  bizde bu userData yı formatlı bir şekilde elde edebilmek için bu metodu yazıyoruz.*/
-        private static string CreateAuthTags(string email, string[] roles, string firstName, string lastName, Guid id)
+        private static string CreateAuthTags(string email, string[] roles, string userName, string firstName, string lastName, Guid id)
         {
             var stringBuilder = new StringBuilder();
 
@@ -42,6 +42,8 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
                     stringBuilder.Append(",");
                 }
             }
+            stringBuilder.Append("|");
+            stringBuilder.Append(userName);
             stringBuilder.Append("|");
             stringBuilder.Append(firstName);
             stringBuilder.Append("|");

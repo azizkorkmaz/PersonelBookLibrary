@@ -10,5 +10,6 @@ namespace PersonalBookLibrary.DataAccess.Abstract
 {
     public interface IUserRoleDal:IEntityRepository<UserRole>
     {
+        
     }
 }

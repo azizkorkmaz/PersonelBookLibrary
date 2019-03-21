@@ -12,5 +12,6 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
     public class EfUserRoleDal: EfEntityRepositoryBase<UserRole, PersonalBookLibraryContext>,
         IUserRoleDal
     {
+
     }
 }

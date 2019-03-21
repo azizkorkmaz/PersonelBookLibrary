@@ -1,0 +1,95 @@
+﻿
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.UserRolesViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+
+    var insertAjaxOptions = new AjaxOptions
+    {
+        AllowCache = false, /*cache alıp almamasını belirliyoruz*/
+        Url = Url.Action("Login"),//gitmesini istedeğimiz adres
+        HttpMethod = "post",//metodu belirliyoruz
+        UpdateTargetId = "Users",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
+        LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
+        LoadingElementDuration = 500//progress nesnesinin görünme süresini belirtiyoruz
+    };
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Saltkin &dash; Responsive Admin &amp; Dashboard UI Template</title>
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,400italic%7cMontserrat:400,700" rel="stylesheet" type="text/css">
+    <!-- Icons -->
+    <link href="~/Content/css/typicons.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template -->
+    <link href="~/Content/css/main.min.css" rel="stylesheet">
+
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+        }
+    </style>
+</head>
+<body class="login-page">
+
+    <!-- Page container -->
+    <div class="container">
+        <p class="text-center">
+            <img src="~/Content/img/logo.png" alt="Logo"><br><br>
+            Kişisel Kütüphaneme Hoşgeldiniz.
+        </p>
+        <div class="login-buttons">
+            <button class="btn btn-login" data-toggle="modal" data-target="#loginModal">Giriş Yapın</button>
+        </div>
+    </div>
+    <!-- /Page container -->
+    <!-- Login modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title">Lütfen giriş yapınız</h2>
+                </div>
+                <div class="modal-body">
+                    @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
+                    @using (Ajax.BeginForm(insertAjaxOptions))
+                    {
+                        <div class="form-group">
+                            <label>Kullanıcı Adı</label>
+
+                            @Html.TextBoxFor(t => t.User.UserName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Şifre</label>
+                            @Html.TextBoxFor(t => t.User.Password, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <button class="btn btn-danger" data-dismiss="modal">Çıkış</button>
+                            <button class="btn btn-primary pull-right">Giriş</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="~/Content/js/plugins/jquery.min.js"></script>
+    <script src="~/Content/js/plugins/modernizr.min.js"></script>
+    <script src="~/Content/js/plugins/bootstrap.min.js"></script>
+    <!-- Site -->
+    <script src="~/Content/js/main.js"></script>
+
+</body>
+</html>

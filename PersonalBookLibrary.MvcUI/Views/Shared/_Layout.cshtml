@@ -8,8 +8,10 @@
 
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,400italic%7cMontserrat:400,700" rel="stylesheet" type="text/css">
-    <!-- Icons -->
-    
+   
+    <!-- Template -->
+    <link href="~/Content/css/main.min.css" rel="stylesheet">
+    <link href="~/Content/css/dropdownlist/dropdownliststyle.css" rel="stylesheet" />
     <link href="~/Content/css/typicons.min.css" rel="stylesheet">
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     <!-- iCheck - Custom radio/check input -->
@@ -52,34 +54,52 @@
                     <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
                     <!-- Sidebar submenu -->
                     <ul class="sidebar-submenu">
-                        <li><a href="buttons.html">Kullanıcı Ekle</a></li>
-                        <li><a href="tables.html">Kullanıcı Güncelle</a></li>
-                        <li><a href="calendar.html">Kullanıcı Sil</a></li>
-                        <li><a href="grid.html">Kullanıcıları Listele</a></li>
+                        <li><a href="@Url.Action("Insert","User")">Kullanıcı Ekle</a></li>
+                        <li><a href="@Url.Action("GetList","User")">Kullanıcıları Listele</a></li>
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
+
                 <li class="has-submenu">
                     <a href="#"><i class="typcn typcn-tabs-outline"></i> <span>Kategori</span></a>
                     <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
                     <!-- Sidebar submenu -->
                     <ul class="sidebar-submenu">
                         <li><a href="@Url.Action("Insert","Category")">Kategori Ekle</a></li>
-                        <li><a href="sidebar_right.html">Kategori Güncelle</a></li>
-                        <li><a href="sidebar_compact.html">Kategori Sil</a></li>
-                        
                         <li><a href="@Url.Action("GetList","Category")">Kategorileri Listele</a></li>
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
                
                 <li class="has-submenu">
-                    <a href="#"><i class="typcn typcn-clipboard"></i> <span>Forms</span></a>
+                    <a href="#"><i class="typcn typcn-tabs-outline"></i> <span>Kitap</span></a>
                     <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
                     <!-- Sidebar submenu -->
                     <ul class="sidebar-submenu">
-                        <li><a href="forms.html">Form layouts</a></li>
-                        <li><a href="forms_elements.html">Form elements</a></li>
+                        <li><a href="@Url.Action("Insert","Book")">Kitap Ekle</a></li>
+                        <li><a href="@Url.Action("GetList","Book")">Kitapları Listele</a></li>
+                    </ul>
+                    <!-- /Sidebar submenu -->
+                </li>
+
+                <li class="has-submenu">
+                    <a href="#"><i class="typcn typcn-tabs-outline"></i> <span>Rol</span></a>
+                    <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
+                    <!-- Sidebar submenu -->
+                    <ul class="sidebar-submenu">
+                        <li><a href="@Url.Action("Insert","Role")">Role Ekle</a></li>
+                        <li><a href="@Url.Action("GetList","Role")">Rolleri Listele</a></li>
+                    </ul>
+                    <!-- /Sidebar submenu -->
+                </li>
+
+                <li class="has-submenu">
+                    <a href="#"><i class="typcn typcn-clipboard"></i> <span>Login İşlemleri</span></a>
+                    <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
+                    <!-- Sidebar submenu -->
+                    <ul class="sidebar-submenu">
+                        <li><a href="@Url.Action("Login","Account")">Login</a></li>
+                        <li><a href="forms_elements.html">Logout</a></li>
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
@@ -407,5 +427,23 @@
     <!-- Site -->
     <script src="~/Content/js/main.js"></script>
     <script src="~/Content/js/jquery/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Content/js/jquery/jquery.sumoselect.min.js"></script>
+    <!-- WYSIWYG -->
+    <script src="~/Content/js/plugins/summernote.min.js"></script>
+    <!-- Responsive multimenu -->
+    <script src="~/Content/js/plugins/multimenu.min.js"></script>
+    <!-- Calendar -->
+    <script src="~/Content/js/plugins/calendar/underscore.min.js"></script>
+    <script src="~/Content/js/plugins/calendar/calendar.min.js"></script>
+    <!-- Masked input -->
+    <script src="~/Content/js/plugins/maskedinput.min.js"></script>
+    <!-- Date and time picker -->
+    <script src="~/Content/js/plugins/datepicker/moment.min.js"></script>
+    <script src="~/Content/js/plugins/datepicker/datetimepicker.min.js"></script>
+    <!-- Site -->
+    <script src="~/Content/js/main.js"></script>
+    <!-- Page specific -->
+    <script src="~/Content/js/page-form-elements.js"></script>
+    
 </body>
 </html>

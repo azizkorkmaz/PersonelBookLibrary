@@ -42,6 +42,7 @@ namespace PersonalBookLibrary.MvcUI
             base.Init();
         }
 
+        //program her çalıştığında burdan başlar yetki kontrolu için.
         private void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
         {
             try

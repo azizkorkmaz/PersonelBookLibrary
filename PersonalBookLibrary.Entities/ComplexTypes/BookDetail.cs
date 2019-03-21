@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonalBookLibrary.Entities.ComplexType
+namespace PersonalBookLibrary.Entities.ComplexTypes
 {
     public class BookDetail
     {
-        public int BookId { get; set; }
+        public int BookID { get; set; }
 
         public string BookName { get; set; }
 
@@ -17,5 +17,22 @@ namespace PersonalBookLibrary.Entities.ComplexType
         public string CategoryName { get; set; }
 
         public string BookSummary { get; set; }
+
+        public string PublisherName { get; set; }
+
+        public int Edition { get; set; }
+
+        public bool LastUpdated { get; set; }
+
+        public bool Status { get; set; }
+
+        public string InsertUser { get; set; }
+
+        public DateTime InsertDate { get; set; }
+
+        public string UpdateUser { get; set; }
+
+        public DateTime? UpdateDate { get; set; }
+
     }
 }

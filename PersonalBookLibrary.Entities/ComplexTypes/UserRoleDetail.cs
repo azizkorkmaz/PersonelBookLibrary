@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonalBookLibrary.Entities.ComplexType
+namespace PersonalBookLibrary.Entities.ComplexTypes
 {
-    public class UserRoleItem
+    public class UserRoleDetail
     {
+        public int UserID { get; set; }
+        public int RoleID { get; set; }
         public string RoleName { get; set; }
     }
 }

@@ -1,0 +1,137 @@
+﻿
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.UserRolesViewModel
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var insertAjaxOptions = new AjaxOptions
+    {
+        AllowCache = false, /*cache alıp almamasını belirliyoruz*/
+        Url = Url.Action("Update"),//gitmesini istedeğimiz adres
+        HttpMethod = "post",//metodu belirliyoruz
+        UpdateTargetId = "Users",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
+        LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
+        LoadingElementDuration = 1000//progress nesnesinin görünme süresini belirtiyoruz
+    };
+}
+
+<!DOCTYPE html>
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+    
+</head>
+
+<html>
+<body>
+    
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kullanıcı Güncelle</header>
+                        <div class="panel-body">
+                            <div id="progress" class="progress" style="display: none;">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width: 100%"></div>
+                            </div>
+                            @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
+                            @using (Ajax.BeginForm(insertAjaxOptions))
+                            {
+                                <div class="form-group">
+                                    <label>Kullanmıcı Id</label>
+                                    @Html.TextBoxFor(t => t.User.UserId, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Şifre</label>
+                                    @Html.TextBoxFor(t => t.User.Password, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kullanıcı Adı</label>
+                                    @Html.TextBoxFor(t => t.User.UserName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Adı</label>
+                                    @Html.TextBoxFor(t => t.User.FirstName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Soyadı</label>
+                                    @Html.TextBoxFor(t => t.User.LastName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    @Html.TextBoxFor(t => t.User.Email, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Rol Belirle:
+
+                                        @Html.DropDownListFor(t => t.UserRoleIds, new MultiSelectList(Model.Roles, "RoleId", "RoleName"), new { @multiple = "multiple", @class = "form-control", @placeholder = "Rol seç", @selected=true })
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Kullanıcı Rolleri:
+
+                                        @ViewBag.UserRoleIds
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ekleyen Kullanıcı</label>
+                                    @Html.TextBoxFor(t => t.User.InsertUser, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ekleme Tarihi</label>
+                                    @Html.TextBoxFor(t => t.User.InsertDate, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        @if (@Model.User.Status)
+                                        {
+                                            <p> Kullanıcı Durumu:Aktif</p>
+                                        }
+                                        else
+                                        {
+                                            <p> Kullanıcı Durumu:Pasif</p>
+                                        }
+
+                                        @Html.CheckBoxFor(t => t.User.Status, new { @class = "form-control" })
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <a href="@Url.Action("GetList","User")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+
+                                    <button class="btn btn-primary pull-right">Güncelle</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

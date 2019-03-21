@@ -13,8 +13,8 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
         {
             var identity = new Identity
             {
-                Id = SetId(ticket),
-                //UserName = SetUserName(ticket),
+                Id = SetId(ticket), 
+                UserName = SetUserName(ticket),
                 FirstName = SetFirstName(ticket),
                 LastName = SetLastName(ticket),
                 Email = SetEmail(ticket),
@@ -23,6 +23,8 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
                 AuthenticationType = SetAuthenticationType(),
                 IsAuthenticated = SetIsAuthenticated()
             };
+
+            //aziz.korkmaz @gmail.com | Admin,Editor | aziz | Aziz | Korkmaz | 00000000 - 0000 - 0000 - 0000 - 000000000000
 
             return identity;
         }
@@ -59,24 +61,25 @@ namespace PersonalBookLibrary.Core.CrossCuttingConcerns.Security.Web
         private string SetLastName(FormsAuthenticationTicket ticket)
         {
             string[] data = ticket.UserData.Split('|');
-            return data[3];
+            return data[4];
         }
 
         private string SetFirstName(FormsAuthenticationTicket ticket)
         {
             string[] data = ticket.UserData.Split('|');
-            return data[2];
+            return data[3];
         }
 
-        //private string SetUserName(FormsAuthenticationTicket ticket)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private string SetUserName(FormsAuthenticationTicket ticket)
+        {
+            string[] data = ticket.UserData.Split('|');
+            return data[2];
+        }
 
         private Guid SetId(FormsAuthenticationTicket ticket)
         {
             string[] data = ticket.UserData.Split('|');
-            return new Guid(data[4]);
+            return new Guid(data[5]);
         }
     }
 }

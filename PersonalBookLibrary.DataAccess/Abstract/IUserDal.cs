@@ -1,5 +1,5 @@
 ﻿using PersonalBookLibrary.Core.DataAccess;
-using PersonalBookLibrary.Entities.ComplexType;
+using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,6 @@ namespace PersonalBookLibrary.DataAccess.Abstract
 {
     public interface IUserDal:IEntityRepository<User>
     {
-        List<UserRoleItem> GetUserRoles(User user);
+        List<UserRoleDetail> GetUserRoles(User user);
     }
 }

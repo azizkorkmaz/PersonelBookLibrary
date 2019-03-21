@@ -1,0 +1,90 @@
+﻿@model PersonalBookLibrary.MvcUI.Models.ComplexType.UserRolesViewModel
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kullanıcı Listesi</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sıra</th>
+                                            <th>Kullanıcı Adı</th>
+                                            <th>Durumu</th>
+                                            <th>Ekleyen Kullanıcı</th>
+                                            <th>Güncelle</th>
+                                            <th>Detay</th>
+                                            <th>Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var user in Model.Users)
+                                        {
+
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@user.UserName</td>
+                                                @if (user.Status)
+                                                {
+                                                    <td><span class="label label-success">Aktif</span></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="label label-danger">Pasif</span></td>
+                                                }
+
+                                                <td>@user.InsertUser</td>
+                                                <td><a href="@Url.Action("Update","User",new {user=Model.Users.ToList(), id=user.UserId})" class="btn btn-success" type="button">Güncelle</a></td>
+                                                <td><a href="@Url.Action("Detail","User",new {user = Model.Users.ToList(), id=user.UserId})" class="btn btn-info" type="button">Detay</a></td>
+                                                <td><a href="@Url.Action("Delete","User",new {user = Model.Users.ToList(), id=user.UserId})" class="btn btn-danger" type="button">Sil</a></td>
+                                            </tr>
+
+                                            i++;
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>
+

@@ -18,7 +18,9 @@ namespace PersonalBookLibrary.Business.Abstract
 
         Category Update(Category category);
 
-        Category Delete(Category category);
+        Category LooseDelete(Category category);
+
+        void HardDelete(Category category);
 
         void TransactionalOperation(Category category1, Category category2);
     }

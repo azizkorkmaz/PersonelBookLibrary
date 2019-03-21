@@ -1,0 +1,99 @@
+﻿@model PersonalBookLibrary.MvcUI.Models.RoleViewModel
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .table {
+            text-align: center;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+
+        .btn {
+            border-radius: 5px 5px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Rol Detay</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Adı</th>
+                                            <th>Durumu</th>
+                                            <th>Ekleyen Kullanıcı</th>
+                                            <th>Ekleme Tarihi</th>
+                                            <th>Güncelleme Durumu</th>
+                                            <th>Güncelleyen Kullanıcı</th>
+                                            <th>Güncelleme Tarihi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Model.Role.RoleId</td>
+                                            <td>@Model.Role.RoleName</td>
+                                            @if (Model.Role.Status)
+                                            {
+                                                <td><span class="label label-success">Aktif</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Pasif</span></td>
+                                            }
+                                            <td>@Model.Role.InsertUser</td>
+                                            <td>@Model.Role.InsertDate</td>
+
+                                            @if (Model.Role.LastUpdated)
+                                            {
+                                                <td><span class="label label-success">Evet</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Hayır</span></td>
+                                            }
+                                            <td>@Model.Role.UpdateUser</td>
+                                            <td>@Model.Role.UpdateDate</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("GetList","Role")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>
+
+

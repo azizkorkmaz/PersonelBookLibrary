@@ -1,0 +1,122 @@
+﻿
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.BookCategoryViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var insertAjaxOptions = new AjaxOptions
+    {
+        AllowCache = false, /*cache alıp almamasını belirliyoruz*/
+        Url = Url.Action("Delete"),//gitmesini istedeğimiz adres
+        HttpMethod = "post",//metodu belirliyoruz
+        UpdateTargetId = "Books",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
+        LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
+        LoadingElementDuration = 500//progress nesnesinin görünme süresini belirtiyoruz
+    };
+}
+
+<!DOCTYPE html>
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<html>
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kitap Sil</header>
+                        <div class="panel-body">
+                            <div id="progress" class="progress" style="display: none;">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width: 100%"></div>
+                            </div>
+                            <div>
+                                <h4>@Model.Book.BookName isimli kitabı silmek istediğinizden emin misiniz?</h4>
+                            </div>
+                            @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
+                            @using (Ajax.BeginForm(insertAjaxOptions))
+                            {
+                                <div class="form-group">
+                                    <label>Kitap Id</label>
+                                    @Html.TextBoxFor(t => t.Book.BookId, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kitap Adı</label>
+                                    @Html.TextBoxFor(t => t.Book.BookName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kategori</label>
+                                    @Html.DropDownListFor(t => t.Book.CategoryID, new SelectList(Model.Categories, "CategoryId", "CategoryName", Model.Book.CategoryID), new { @class = "form-control", @placeholder = "Kategori", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Yazar Adı</label>
+                                    @Html.TextBoxFor(t => t.Book.AuthorName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Yayın Evi</label>
+                                    @Html.TextBoxFor(t => t.Book.PublisherName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Basım Sayısı</label>
+                                    @Html.TextBoxFor(t => t.Book.Edition, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kitap Özeti</label>
+                                    @Html.TextAreaFor(t => t.Book.BookSummary, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ekleyen Kullanıcı</label>
+                                    @Html.TextBoxFor(t => t.Book.InsertUser, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ekleme Tarihi</label>
+                                    @Html.TextBoxFor(t => t.Book.InsertDate, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Kitap Durumu
+                                        @Html.CheckBoxFor(t => t.Book.Status, new { @class = "form-control" })
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <a href="@Url.Action("GetList","Book")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+
+                                    <button class="btn btn-primary pull-right">Sil</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

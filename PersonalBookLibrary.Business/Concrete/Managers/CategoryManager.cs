@@ -9,6 +9,8 @@ using PersonalBookLibrary.Core.Aspects.Postsharp.CacheAspects;
 using PersonalBookLibrary.Core.CrossCuttingConcerns.Caching.Microsoft;
 using PersonalBookLibrary.Core.Aspects.Postsharp.PerformanceAspects;
 using AutoMapper;
+using PersonalBookLibrary.Core.Aspects.Postsharp.AuthorizationAspects;
+using System;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -23,13 +25,17 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             _categoryDal = categoryDal;
             _mapper = mapper;
         }
-
+        
         [FluentValidationAspect(typeof(CategoryValidator))]
         [CacheRemoveAspect(typeof(MemoryCacheManager))]//ekleme yapıldığında bütün cacheleri siler
+        [SecuredOperationAspect(Roles = "Admin,Editor,Student")]
         public Category Add(Category category)
         {
             /* Burada validate yapmamız doğru değil Solid e uygun değil. Bu kodu aspect şeklinde yazacağız.*/
             //ValidatorTool.FluentValidate(new CategoryValidator(), category);
+            category.InsertDate = DateTime.Now.ToLocalTime();
+            category.InsertUser = "Aziz";//burayı cookie den çek
+            category.LastUpdated = false;
 
             var categoryAdd = _mapper.Map<Category, Category>(_categoryDal.Add(category));
             return categoryAdd;
@@ -37,13 +43,12 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
         [CacheAspect(typeof(MemoryCacheManager))]
         [PerformanceCounterAspect(2)]
-        //[SecuredOperationAspect(Roles="Admin,Editor,Student")]
         public List<Category> GetAll()
         {
             //Thread.Sleep(3000);
             //return _categoryDal.GetList();
 
-            /*entityframework un eski sürümlerinde serileştirme işlemi yapamadığı için yazdık.*/
+            /*entityframework te serileştirme işlemi yapamadığı için yazdık.*/
 
             /*Aşağıdaki kod öneğini core katmanında yazdığımız AutoMapperHelper ile mapliyoruz.*/
             //var categories = AutoMapperHelper.MapToSameTypeList(_categoryDal.GetList());
@@ -53,7 +58,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             return categories;
         }
 
-
+        [FluentValidationAspect(typeof(CategoryValidator))]
         public Category GetById(int id)
         {
             var category = _mapper.Map<Category, Category>(_categoryDal.Get(c => c.CategoryId == id));
@@ -61,11 +66,17 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         }
 
         [FluentValidationAspect(typeof(CategoryValidator))]
+        [SecuredOperationAspect(Roles = "Student")]
         public Category Update(Category category)
         {
+            category.LastUpdated = true;
+            category.UpdateDate = DateTime.Now.ToLocalTime();
+            category.UpdateUser = "Aziz";//burayı cookiden çek
+
             var categoryUpdate = _mapper.Map<Category, Category>(_categoryDal.Update(category));
-            /*Burada LastUpdate ,updateUser ve UpdateDate propertyleri ayarla.*/
+            
             return categoryUpdate;
+            //burada not authorized hatası geliyor SecuredOperationAspect ten dolayı 
         }
 
         [TransactionScopeAspect]
@@ -91,11 +102,21 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             _categoryDal.Update(category2);
         }
 
-        public Category Delete(Category category)
+        [FluentValidationAspect(typeof(CategoryValidator))]
+        [SecuredOperationAspect(Roles = "Admin,Editor,Student")]
+        public Category LooseDelete(Category category)
         {
-            var categoryDelete = _mapper.Map<Category, Category>(_categoryDal.Delete(category));
-            categoryDelete.Status = false;
-            return categoryDelete;
+            category.Status = false;
+
+            var categoryLooseDelete = _mapper.Map<Category, Category>(_categoryDal.Update(category));
+            return categoryLooseDelete;
+        }
+
+        [FluentValidationAspect(typeof(CategoryValidator))]
+        [SecuredOperationAspect(Roles = "Admin,Editor,Student")]
+        public void HardDelete(Category category)
+        {
+             _categoryDal.HardDelete(category);
         }
     }
 }

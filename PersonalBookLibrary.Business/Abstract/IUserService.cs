@@ -1,4 +1,4 @@
-﻿using PersonalBookLibrary.Entities.ComplexType;
+﻿using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -14,14 +14,17 @@ namespace PersonalBookLibrary.Business.Abstract
 
         User GetById(int id);
 
-        User Add(User user);
+        User Add(User user, List<int> roleIds);
 
-        User Update(User user);
+        User Update(User user, List<int> roleIds);
 
-        void Delete(User user);
+        User LooseDelete(User user);
+
+        void HardDelete(User user);
 
         User GetByUserNameAndPassword(string userName, string password);
 
-        List<UserRoleItem> GetUserRoles(User user);
+        List<UserRoleDetail> GetUserRoles(User user);
+
     }
 }
