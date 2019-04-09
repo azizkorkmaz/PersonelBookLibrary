@@ -34,6 +34,12 @@ namespace PersonalBookLibrary.Business.DependencyResolvers.Ninject
 
             Bind<IUserRolesTransactionService>().To<UserRolesTransactionManager>().InSingletonScope();
 
+            Bind<IReadBookService>().To<ReadBookManager>().InSingletonScope();
+            Bind<IReadBookDal>().To<EfReadBookDal>().InSingletonScope();
+
+            //Bind<ILentBookService>().To<LentBookManager>().InSingletonScope();
+            Bind<ILentBookDal>().To<EfLentBookDal>().InSingletonScope();
+
         }
     }
 }

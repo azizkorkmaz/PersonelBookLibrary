@@ -1,5 +1,6 @@
 ﻿
-@model PersonalBookLibrary.MvcUI.Models.CategoryViewModel
+
+@model PersonalBookLibrary.MvcUI.Models.ReadBookViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -9,7 +10,7 @@
         AllowCache = false, /*cache alıp almamasını belirliyoruz*/
         Url = Url.Action("Delete"),//gitmesini istedeğimiz adres
         HttpMethod = "post",//metodu belirliyoruz
-        UpdateTargetId = "Categories",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        UpdateTargetId = "ReadBooks",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
         InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
         LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
         LoadingElementDuration = 500//progress nesnesinin görünme süresini belirtiyoruz
@@ -43,71 +44,77 @@
                 <!-- Responsive table -->
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <header class="panel-heading">Kategori Sil</header>
+                        <header class="panel-heading">Okunacak Kitap Sil</header>
                         <div class="panel-body">
                             <div id="progress" class="progress" style="display: none;">
                                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width: 100%"></div>
                             </div>
                             <div>
-                                <h4>@Model.Category.CategoryName isimli kategoriyi silmek istediğinizden emin misiniz?</h4>
+                                <h4>@Model.ReadBook.BookName isimli kitabı silmek istediğinizden emin misiniz?</h4>
                             </div>
                             @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
                             @using (Ajax.BeginForm(insertAjaxOptions))
                             {
                                 <div class="form-group">
-                                    <label>Kategori Id</label>
-                                    @Html.TextBoxFor(t => t.Category.CategoryId, new { @class = "form-control", @readonly = "readonly" })
+                                    <label>Kitap Id</label>
+                                    @Html.TextBoxFor(t => t.ReadBook.ReadBookId, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Adı</label>
-                                    @Html.TextBoxFor(t => t.Category.CategoryName, new { @class = "form-control", @readonly = "readonly" })
+                                    <label>Kitap Adı</label>
+                                    @Html.TextBoxFor(t => t.ReadBook.BookName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Yazar Adı</label>
+                                    @Html.TextBoxFor(t => t.ReadBook.AuthorName, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
 
                                 <div class="form-group">
                                     <label>Ekleyen Kullanıcı</label>
-                                    @Html.TextBoxFor(t => t.Category.InsertUser, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(t => t.ReadBook.InsertUser, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
 
                                 <div class="form-group">
                                     <label>Ekleme Tarihi</label>
-                                    @Html.TextBoxFor(t => t.Category.InsertDate, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(t => t.ReadBook.InsertDate, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
-                                
+
                                 <div class="form-group">
-                                    
-                                    @if (Model.Category.LastUpdated)
+
+                                    @if (Model.ReadBook.LastUpdated)
                                     {
                                         <label>Güncellendi mi</label>
-                                        @Html.TextBoxFor(t => t.Category.LastUpdated, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.TextBoxFor(t => t.ReadBook.LastUpdated, new { @class = "form-control", @readonly = "readonly" })
                                     }
                                 </div>
 
                                 <div class="form-group">
-                                    
-                                    @if (Model.Category.LastUpdated)
+
+                                    @if (Model.ReadBook.LastUpdated)
                                     {
                                         <label>Güncelleyen Kullanıcı</label>
-                                        @Html.TextBoxFor(t => t.Category.UpdateUser, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.TextBoxFor(t => t.ReadBook.UpdateUser, new { @class = "form-control", @readonly = "readonly" })
                                     }
                                 </div>
 
                                 <div class="form-group">
-                                    
-                                    @if (Model.Category.LastUpdated)
+
+                                    @if (Model.ReadBook.LastUpdated)
                                     {
                                         <label>Güncelleme Tarihi</label>
-                                        @Html.TextBoxFor(t => t.Category.UpdateDate, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.TextBoxFor(t => t.ReadBook.UpdateDate, new { @class = "form-control", @readonly = "readonly" })
                                     }
                                 </div>
+
 
                                 <div class="form-group">
                                     <label>
                                         Kitap Durumu
-                                        @Html.CheckBoxFor(t => t.Category.Status, new { @class = "form-control" })
+                                        @Html.CheckBoxFor(t => t.ReadBook.Status, new { @class = "form-control" })
                                     </label>
                                 </div>
+
                                 <div>
-                                    <a href="@Url.Action("GetList","Category")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+                                    <a href="@Url.Action("GetList","ReadBook")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
 
                                     <button class="btn btn-primary pull-right">Sil</button>
                                 </div>
@@ -124,3 +131,7 @@
 
 </body>
 </html>
+
+
+
+

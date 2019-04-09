@@ -51,16 +51,22 @@
   <ItemGroup>
     <Compile Include="Abstract\IBookDal.cs" />
     <Compile Include="Abstract\ICategoryDal.cs" />
+    <Compile Include="Abstract\ILentBookDal.cs" />
+    <Compile Include="Abstract\IReadBookDal.cs" />
     <Compile Include="Abstract\IRoleDal.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
     <Compile Include="Abstract\IUserRoleDal.cs" />
     <Compile Include="Concrete\EntityFramework\EfBookDal.cs" />
     <Compile Include="Concrete\EntityFramework\EfCategoryDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfLentBookDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfReadBookDal.cs" />
     <Compile Include="Concrete\EntityFramework\EfRoleDal.cs" />
     <Compile Include="Concrete\EntityFramework\EfUserDal.cs" />
     <Compile Include="Concrete\EntityFramework\EfUserRoleDal.cs" />
     <Compile Include="Concrete\EntityFramework\Mapping\BookMap.cs" />
     <Compile Include="Concrete\EntityFramework\Mapping\CategoryMap.cs" />
+    <Compile Include="Concrete\EntityFramework\Mapping\LentBookMap.cs" />
+    <Compile Include="Concrete\EntityFramework\Mapping\ReadBookMap.cs" />
     <Compile Include="Concrete\EntityFramework\Mapping\RoleMap.cs" />
     <Compile Include="Concrete\EntityFramework\Mapping\UserMap.cs" />
     <Compile Include="Concrete\EntityFramework\Mapping\UserRoleMap.cs" />

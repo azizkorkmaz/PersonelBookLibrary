@@ -8,7 +8,7 @@
 
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,400italic%7cMontserrat:400,700" rel="stylesheet" type="text/css">
-   
+
     <!-- Template -->
     <link href="~/Content/css/main.min.css" rel="stylesheet">
     <link href="~/Content/css/dropdownlist/dropdownliststyle.css" rel="stylesheet" />
@@ -70,7 +70,7 @@
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
-               
+
                 <li class="has-submenu">
                     <a href="#"><i class="typcn typcn-tabs-outline"></i> <span>Kitap</span></a>
                     <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
@@ -103,21 +103,29 @@
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
-                <li>
-                    <a href="email.html"><i class="typcn typcn-mail"></i> <span>Email</span></a>
-                    <div class="sidebar-link-addon"><span class="badge">12</span></div>
-                </li>
+
                 <li class="has-submenu">
-                    <a href="#"><i class="typcn typcn-document-text"></i> <span>Pages</span></a>
+                    <a href="#"><i class="typcn typcn-clipboard"></i> <span>Okunacak Kitaplar</span></a>
                     <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
                     <!-- Sidebar submenu -->
                     <ul class="sidebar-submenu">
-                        <li><a href="error.html">Error page</a></li>
-                        <li><a href="login.html">Login and register</a></li>
-                        <li><a href="search.html">Search results</a></li>
+                        <li><a href="@Url.Action("Insert","ReadBook")">Okunacak Kitap Ekle</a></li>
+                        <li><a href="@Url.Action("GetList","ReadBook")">Okunacak Kitaplar Listesi</a></li>
                     </ul>
                     <!-- /Sidebar submenu -->
                 </li>
+
+                <li class="has-submenu">
+                    <a href="#"><i class="typcn typcn-clipboard"></i> <span>Ödünç Verilen Kitaplar</span></a>
+                    <div class="sidebar-link-addon"><i class="typcn typcn-plus"></i></div>
+                    <!-- Sidebar submenu -->
+                    <ul class="sidebar-submenu">
+                        <li><a href="@Url.Action("Insert","LentBook")">Ödünç Kitap Ekle</a></li>
+                        <li><a href="@Url.Action("GetList","LentBook")">Ödünç Kitaplar Listesi</a></li>
+                    </ul>
+                    <!-- /Sidebar submenu -->
+                </li>
+
             </ul>
             <!-- /Sidebar group -->
             <!-- Sidebar group -->
@@ -147,7 +155,7 @@
         </aside>
         <!-- /Sidebar -->
         <!-- Content -->
-       
+
         <div id="content">
             <!-- Header -->
             <nav class="header-site">
@@ -444,6 +452,6 @@
     <script src="~/Content/js/main.js"></script>
     <!-- Page specific -->
     <script src="~/Content/js/page-form-elements.js"></script>
-    
+
 </body>
 </html>

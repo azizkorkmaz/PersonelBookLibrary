@@ -46,6 +46,8 @@
     <Compile Include="Concrete\BaseModel.cs" />
     <Compile Include="Concrete\Book.cs" />
     <Compile Include="Concrete\Category.cs" />
+    <Compile Include="Concrete\LentBook.cs" />
+    <Compile Include="Concrete\ReadBook.cs" />
     <Compile Include="Concrete\Role.cs" />
     <Compile Include="Concrete\User.cs" />
     <Compile Include="Concrete\UserRole.cs" />

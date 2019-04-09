@@ -23,6 +23,8 @@ namespace PersonalBookLibrary.Business.Mappings.AutoMapper.Profiles
             CreateMap<BookDetail, BookDetail>();
             CreateMap<UserRoleDetail, UserRoleDetail>();
             CreateMap<UserRolesList, UserRolesList>();
+            CreateMap<ReadBook, ReadBook>();
+            CreateMap<LentBook, LentBook>();
         }
     }
 }

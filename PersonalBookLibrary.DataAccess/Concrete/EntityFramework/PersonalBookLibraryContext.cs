@@ -28,6 +28,10 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
 
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<LentBook> LentBooks { get; set; }
+
+        public DbSet<ReadBook> ReadBooks { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserMap());
@@ -35,6 +39,8 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new UserRoleMap());
             modelBuilder.Configurations.Add(new CategoryMap());
+            modelBuilder.Configurations.Add(new LentBookMap());
+            modelBuilder.Configurations.Add(new ReadBookMap());
         }
     }
 }

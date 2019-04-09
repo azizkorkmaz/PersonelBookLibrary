@@ -104,12 +104,15 @@
   <ItemGroup>
     <Compile Include="Abstract\IBookService.cs" />
     <Compile Include="Abstract\ICategoryService.cs" />
+    <Compile Include="Abstract\ILentBookService.cs" />
+    <Compile Include="Abstract\IReadBookService.cs" />
     <Compile Include="Abstract\IRoleService.cs" />
     <Compile Include="Abstract\IUserRoleService.cs" />
     <Compile Include="Abstract\IUserRolesTransactionService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="Concrete\Managers\BookManager.cs" />
     <Compile Include="Concrete\Managers\CategoryManager.cs" />
+    <Compile Include="Concrete\Managers\ReadBookManager.cs" />
     <Compile Include="Concrete\Managers\RoleManager.cs" />
     <Compile Include="Concrete\Managers\UserManager.cs" />
     <Compile Include="Concrete\Managers\UserRoleManager.cs" />
