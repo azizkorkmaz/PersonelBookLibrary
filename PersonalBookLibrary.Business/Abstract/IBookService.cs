@@ -12,6 +12,10 @@ namespace PersonalBookLibrary.Business.Abstract
     {
         List<List<BookDetail>> GetAll();
 
+        List<Book> GetAllBook();
+
+       List<List<BookDetail>> GetActiveBook();
+
         List<BookDetail> GetBookDetail(Book book);
 
         BookDetail GetByIdBookDetail(int id);

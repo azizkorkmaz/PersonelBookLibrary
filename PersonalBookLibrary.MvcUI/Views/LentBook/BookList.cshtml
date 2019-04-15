@@ -1,0 +1,94 @@
+﻿
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.LentBookViewModel
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Ödünç Verilebilen Kitaplar Listesi</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table footable table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sıra</th>
+                                            <th data-toggle="true">Kitap Adı</th>
+                                            <th>Yazar Adı</th>
+                                            <th>Kategori Adı</th>
+                                            <th>Ekleyen Kullanıcı</th>
+                                            <th>Ödünç Ver</th>
+                                            <th>Detay</th>
+                                            <th>Geri Dön</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                            @foreach (var bookDetail in Model.BookDetailList)
+                                            {
+                                                foreach (var book in bookDetail)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>
+                                                            @book.BookName
+                                                        </td>
+                                                        <td>
+                                                            @book.AuthorName
+                                                        </td>
+                                                        <td>
+                                                            @book.CategoryName
+                                                        </td>
+
+                                                        <td>@book.InsertUser</td>
+                                                        <td><a href="@Url.Action("Insert","LentBook",new {book=Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-success" type="button">Ödünç Ver</a></td>
+                                                        <td><a href="@Url.Action("BookDetail","LentBook",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-info" type="button">Detay</a></td>
+                                                        <td><a href="@Url.Action("GetList","Book")" class="btn btn-primary" type="button">Geri Dön</a></td>
+                                                    </tr>
+                                                }
+
+
+                                                i++;
+                                            }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

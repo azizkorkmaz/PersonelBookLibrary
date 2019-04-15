@@ -11,6 +11,8 @@ using PersonalBookLibrary.Core.Aspects.Postsharp.TransactionAspects;
 using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.Core.Aspects.Postsharp.VlidationAspects;
 using PersonalBookLibrary.Business.ValidationRules.FluentValidation;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -50,13 +52,14 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                             userRole = new UserRole
                             {
                                 InsertDate = DateTime.Now.ToLocalTime(),
-                                InsertUser = "Aziz",
+                                InsertUser = (HttpContext.Current.User.Identity as Identity).UserName,
                                 RoleID = role,
                                 UserID = user.UserId,
                                 Status = true
                             };
 
-                            insertUserRole = _mapper.Map<UserRole, UserRole>(_userRoleDal.Add(userRole));
+                            insertUserRole = 
+                                _mapper.Map<UserRole, UserRole>(_userRoleDal.Add(userRole));
 
                         }
                     }
@@ -98,7 +101,8 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                             userRole = new UserRole
                             {
                                 InsertDate = DateTime.Now.ToLocalTime(),
-                                InsertUser = "Aziz",
+                                InsertUser = 
+                                (HttpContext.Current.User.Identity as Identity).UserName,
                                 RoleID = role,
                                 UserID = user.UserId,
                                 Status = true

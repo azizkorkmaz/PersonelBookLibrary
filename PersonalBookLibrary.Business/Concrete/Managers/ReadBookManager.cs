@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using PersonalBookLibrary.Entities.Concrete;
 using PersonalBookLibrary.DataAccess.Abstract;
 using AutoMapper;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -30,7 +32,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 if (readBook != null)
                 {
                     readBook.InsertDate = DateTime.Now.ToLocalTime();
-                    readBook.InsertUser = "Aziz";//burayı cookiden al
+                    readBook.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;
                     readBook.Status = true;
 
                     addReadBook = _mapper.Map<ReadBook, ReadBook>(_readBookDal.Add(readBook));
@@ -100,7 +102,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 {
                     readBook.LastUpdated = true;
                     readBook.UpdateDate = DateTime.Now.ToLocalTime();
-                    readBook.UpdateUser = "Aziz";//burayı cookiden çek
+                    readBook.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;
 
                     readBookUpdate = _mapper.Map<ReadBook, ReadBook>(_readBookDal.Update(readBook));
                 }

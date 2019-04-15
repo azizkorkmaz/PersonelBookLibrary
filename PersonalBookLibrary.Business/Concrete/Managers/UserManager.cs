@@ -11,6 +11,8 @@ using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.Core.Aspects.Postsharp.TransactionAspects;
 using PersonalBookLibrary.Core.Aspects.Postsharp.VlidationAspects;
 using PersonalBookLibrary.Business.ValidationRules.FluentValidation;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -32,10 +34,10 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         [FluentValidationAspect(typeof(UserRoleValidator))]
         public User Add(User user, List<int> roleIds)
         {
-            var userRole = new UserRole();//burayı newlememem gerek çözüm ara
+            var userRole = new UserRole();
             var userAdd = new User();
 
-            user.InsertUser = "Aziz";
+            user.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;
             user.InsertDate = DateTime.Now.ToLocalTime();
             user.Status = true;
 
@@ -50,7 +52,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 foreach (var roleId in roleIds)
                 {
                     userRole.InsertDate = DateTime.Now.ToLocalTime();
-                    userRole.InsertUser = "Aziz";
+                    userRole.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;
                     userRole.RoleID = roleId;
                     userRole.UserID = user.UserId;
                     userRole.Status = true;
@@ -93,11 +95,11 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         [FluentValidationAspect(typeof(UserRoleValidator))]
         public User Update(User user, List<int> roleIds)
         {
-            var userRole = new UserRole();//burayı newlememem gerek çözüm ara
+            var userRole = new UserRole();
 
             user.UpdateDate = DateTime.Now.ToLocalTime();
             user.LastUpdated = true;
-            user.UpdateUser = "Aziz";
+            user.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;
 
             var roles = _userRoleDal.GetList().Where(u => u.UserID == user.UserId).Select(u => u.UserRolesId).ToList();
 
@@ -112,7 +114,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
             foreach (var role in roleIds)
             {
-                userRole.InsertUser = "Aziz";//burayı cookiden çek
+                userRole.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;
                 userRole.InsertDate = DateTime.Now.ToLocalTime();
                 userRole.RoleID = role;
                 userRole.UserID = user.UserId;
@@ -128,11 +130,11 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         [FluentValidationAspect(typeof(UserRoleValidator))]
         public User LooseDelete(User user)
         {
-            var userRole = new UserRole();//burayı newlememem gerek çözüm ara
+            var userRole = new UserRole();
 
             user.UpdateDate = DateTime.Now.ToLocalTime();
             user.LastUpdated = true;
-            user.UpdateUser = "Aziz";
+            user.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;
             user.Status = false;
 
             var roles = _userRoleDal.GetList().Where(u => u.UserID == user.UserId).Select(u => u.UserRolesId).ToList();

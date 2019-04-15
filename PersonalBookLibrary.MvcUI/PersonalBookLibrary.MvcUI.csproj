@@ -227,6 +227,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LentBookController.cs" />
     <Compile Include="Controllers\ReadBookController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -235,6 +236,7 @@
     </Compile>
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ComplexType\BookCategoryViewModel.cs" />
+    <Compile Include="Models\ComplexType\LentBookViewModel.cs" />
     <Compile Include="Models\ComplexType\UserRolesViewModel.cs" />
     <Compile Include="Models\ReadBookViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -288,6 +290,13 @@
     <Content Include="Views\ReadBook\Update.cshtml" />
     <Content Include="Views\ReadBook\Detail.cshtml" />
     <Content Include="Views\ReadBook\Delete.cshtml" />
+    <Content Include="Views\LentBook\Insert.cshtml" />
+    <Content Include="Views\LentBook\BookList.cshtml" />
+    <Content Include="Views\LentBook\BookDetail.cshtml" />
+    <Content Include="Views\LentBook\GetList.cshtml" />
+    <Content Include="Views\LentBook\Update.cshtml" />
+    <Content Include="Views\LentBook\LentBookDetail.cshtml" />
+    <Content Include="Views\LentBook\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,5 @@
 ﻿using PersonalBookLibrary.Core.DataAccess;
+using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,7 @@ namespace PersonalBookLibrary.DataAccess.Abstract
 {
     public interface ILentBookDal: IEntityRepository<LentBook>
     {
+        List<LentBookDetail> GetLentBookDetail(LentBook lentBook);
+        LentBookDetail GetByIdLentBookDetail(int id);
     }
 }

@@ -1,0 +1,117 @@
+﻿
+
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.LentBookViewModel
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var insertAjaxOptions = new AjaxOptions
+    {
+        AllowCache = false, /*cache alıp almamasını belirliyoruz*/
+        Url = Url.Action("Update"),//gitmesini istedeğimiz adres
+        HttpMethod = "post",//metodu belirliyoruz
+        UpdateTargetId = "LentBooks",//işlem gerçekleştikten sonra update olmasını istediğimiz yeri belirtiyoruz.
+        InsertionMode = InsertionMode.Replace,//ajax işleminden sonra verileri nereye basamasını istediğimizi belirtiriz.
+        LoadingElementId = "progress",//html elemanlarından ıd si progress olan elemanı göster diyoruz
+        LoadingElementDuration = 1000//progress nesnesinin görünme süresini belirtiyoruz
+    };
+}
+
+<!DOCTYPE html>
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<html>
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Ödünç Kitap Bilgileri Güncelle</header>
+                        <div class="panel-body">
+                            <div id="progress" class="progress" style="display: none;">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width: 100%"></div>
+                            </div>
+                            @*Html.BeginForm yerine ajax.beginform yazıyoruz*@
+                            @using (Ajax.BeginForm(insertAjaxOptions))
+                            {
+                                @Html.HiddenFor(t => t.LentBook.LentBookId)
+                                @Html.HiddenFor(t => t.LentBook.BookID)
+                                @Html.HiddenFor(t => t.LentBook.InsertUser)
+                                @Html.HiddenFor(t => t.LentBook.Status)
+
+                                <div class="form-group">
+                                    <label>Kitap Adı</label>
+                                    @Html.TextBoxFor(t => t.LentBookDetail.BookName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Yazar Adı</label>
+                                    @Html.TextBoxFor(t => t.LentBookDetail.AuthorName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kategori Adı</label>
+                                    @Html.TextBoxFor(t => t.LentBookDetail.CategoryName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ödünç Alan Adı</label>
+                                    @Html.TextBoxFor(t => t.LentBook.BorrowPersonName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ödünç Alan Soyadı</label>
+                                    @Html.TextBoxFor(t => t.LentBook.BorrowPersonLastName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ödünç Veren Adı</label>
+                                    @Html.TextBoxFor(t => t.LentBook.GivenUserName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ödünç Verme Tarihi</label>
+                                    @Html.TextBoxFor(t => t.LentBook.GivenDate, new { @class = "form-control" })
+                                </div>
+
+                                @*<div class="form-group">
+                                        <label>Ekleyen Kullanıcı</label>
+                                        @Html.TextBoxFor(t => t.LentBookDetail.InsertUser, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>*@
+
+                                <div class="form-group">
+                                        <label>Ekleme Tarihi</label>
+                                        @Html.TextBoxFor(t => t.LentBook.InsertDate, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+
+                                <div>
+                                    <a href="@Url.Action("GetList","LentBook")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+
+                                    <button class="btn btn-primary pull-right">Güncelle</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>

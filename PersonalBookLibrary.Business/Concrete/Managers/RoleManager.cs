@@ -9,6 +9,8 @@ using PersonalBookLibrary.DataAccess.Abstract;
 using AutoMapper;
 using PersonalBookLibrary.Core.Aspects.Postsharp.VlidationAspects;
 using PersonalBookLibrary.Business.ValidationRules.FluentValidation;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -30,7 +32,8 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
             if (role != null)
             {
-                role.InsertUser = "Aziz";//burayı cookiden çek
+                role.Status = true;
+                role.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;
                 role.InsertDate = DateTime.Now.ToLocalTime();
 
                 rolAdd = _mapper.Map<Role, Role>(_roleDal.Add(role));
@@ -63,7 +66,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             if (role != null)
             {
                 role.UpdateDate = DateTime.Now.ToLocalTime();
-                role.UpdateUser = "Aziz";//burayı cookiden çek
+                role.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;
                 role.LastUpdated = true;
 
                 roleUpdate = _mapper.Map<Role, Role>(_roleDal.Update(role));

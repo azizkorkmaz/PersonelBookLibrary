@@ -1,0 +1,142 @@
+﻿
+
+@model PersonalBookLibrary.MvcUI.Models.ComplexType.LentBookViewModel
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .table {
+            text-align: center;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+
+        .btn {
+            border-radius: 5px 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Kitap Detayı</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Kitap Adı</th>
+                                            <th>Kategori</th>
+                                            <th>Yazar Adı</th>
+                                            <th>Yayın Evi</th>
+                                            <th>Basım Saysı</th>
+                                            <th>Durumu</th>
+                                            <th>Ekleyen Kullanıcı</th>
+                                            <th>Ekleme Tarihi</th>
+                                            <th>Güncelleme Durumu</th>
+                                            <th>Güncelleyen Kullanıcı</th>
+                                            <th>Güncelleme Tarihi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Model.BookDetail.BookID</td>
+                                            <td>@Model.BookDetail.BookName</td>
+                                            <td>@Model.BookDetail.CategoryName</td>
+                                            <td>@Model.BookDetail.AuthorName</td>
+                                            <td>@Model.BookDetail.PublisherName</td>
+                                            <td>@Model.BookDetail.Edition</td>
+                                            @if (Model.BookDetail.Status)
+                                            {
+                                                <td><span class="label label-success">Aktif</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Pasif</span></td>
+                                            }
+                                            <td>@Model.BookDetail.InsertUser</td>
+                                            <td>@Model.BookDetail.InsertDate</td>
+
+                                            @if (Model.BookDetail.LastUpdated)
+                                            {
+                                                <td><span class="label label-success">Evet</span></td>
+                                                <td>@Model.BookDetail.UpdateUser</td>
+                                                <td>@Model.BookDetail.UpdateDate</td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-danger">Hayır</span></td>
+                                                <td>Güncelleme Yapılmadı</td>
+                                                <td>Güncelleme Yapılmadı</td>
+                                            }
+                                            
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("BookList","LentBook")" class="btn btn-primary pull-right" type="button">Geri Dön</a>
+                                <button type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#bookSummaryModalLong">Kitap Özeti</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="bookSummaryModalLong" tabindex="-1" role="dialog" aria-labelledby="bookSummaryModalTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="bookSummaryModalTitle">@Model.BookDetail.BookName özeti</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if (Model.BookDetail.BookSummary != null)
+                            {
+                                @Model.BookDetail.BookSummary
+                            }
+                            else
+                            {
+                                <p style="color:red">Kitap özeti eklenmemiştir!</p>
+                            }
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal -->
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>
+
+

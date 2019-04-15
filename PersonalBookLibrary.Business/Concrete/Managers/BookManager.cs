@@ -8,6 +8,8 @@ using PersonalBookLibrary.Entities.Concrete;
 using PersonalBookLibrary.DataAccess.Abstract;
 using AutoMapper;
 using PersonalBookLibrary.Entities.ComplexTypes;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -29,7 +31,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             if (book != null)
             {
                 book.InsertDate = DateTime.Now.ToLocalTime();
-                book.InsertUser = "Aziz";//burayı cookiden al
+                book.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;//burayı cookiden al
                 book.Status = true;
 
                 bookAdd = _mapper.Map<Book, Book>(_bookDal.Add(book));
@@ -37,6 +39,22 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 return bookAdd;
             }
             return bookAdd;
+        }
+
+        public List<List<BookDetail>> GetActiveBook()
+        {
+            //burada statusu true olan kitapların listesini çek
+            var bookDetails = new List<List<BookDetail>>();
+            var bookDetail = new List<BookDetail>();
+            var activeBooks = 
+                _mapper.Map<List<Book>, List<Book>>(_bookDal.GetList(b=>b.Status==true)).ToList();
+            foreach (var book in activeBooks)
+            {
+                bookDetail = 
+                    _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book));
+                bookDetails.Add(bookDetail);
+            }
+            return bookDetails;
         }
 
         public List<List<BookDetail>> GetAll()
@@ -47,11 +65,19 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
             foreach (var book in bookGetAll)
             {
-                bookDetail = _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book)).ToList();
+                bookDetail = 
+                    _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book)).ToList();
                 bookDetailList.Add(bookDetail);
             }
 
             return bookDetailList;
+        }
+
+        public List<Book> GetAllBook()
+        {
+            var bookAll = _mapper.Map<List<Book>, List<Book>>(_bookDal.GetList()).ToList();
+
+            return bookAll;
         }
 
         public List<BookDetail> GetBookDetail(Book book)
@@ -82,6 +108,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             var bookDetail = new BookDetail();
             if (id > 0)
             {
+                //burayı daha güzel kodla
                 book = _mapper.Map<Book, Book>(_bookDal.Get(b => b.BookId == id));
                 bookDetails = _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book));
 
@@ -124,7 +151,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             if (book != null)
             {
                 book.UpdateDate = DateTime.Now.ToLocalTime();
-                book.UpdateUser = "Aziz";//burayı cookieden çek
+                book.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;//burayı cookieden çek
                 book.LastUpdated = true;
 
                 bookUpdate = _mapper.Map<Book, Book>(_bookDal.Update(book));

@@ -12,5 +12,6 @@ namespace PersonalBookLibrary.DataAccess.Abstract
     public interface IBookDal : IEntityRepository<Book>
     {
         List<BookDetail> GetBookDetail(Book book);
+        BookDetail GetBookDetailById(Book book);
     }
 }

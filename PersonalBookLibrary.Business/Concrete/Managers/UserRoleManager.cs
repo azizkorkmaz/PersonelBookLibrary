@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PersonalBookLibrary.Entities.Concrete;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -40,7 +42,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 RoleID = roleId,
                 UserID = userId,
                 InsertDate = DateTime.Now.ToLocalTime(),
-                InsertUser = "Aziz",//cookiden çek
+                InsertUser = (HttpContext.Current.User.Identity as Identity).UserName,
                 Status = true
             };
 
@@ -50,6 +52,9 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
 
         public UserRole Update(UserRole userRole)
         {
+            userRole.LastUpdated = true;
+            userRole.UpdateDate = DateTime.Now.ToLocalTime();
+            userRole.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;
             var userRoleUpdate = _mapper.Map<UserRole, UserRole>(_userRoleDal.Update(userRole));
             return userRoleUpdate;
         }

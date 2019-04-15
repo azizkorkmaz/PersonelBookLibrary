@@ -19,7 +19,7 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
                 var result = from b in context.Books
                              join c in context.Categories
                              on b.CategoryID equals c.CategoryId
-                             where b.CategoryID == book.CategoryID
+                             where b.BookId == book.BookId
                              select new BookDetail
                              {
                                  CategoryName = c.CategoryName,
@@ -37,6 +37,35 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
                                  Status = b.Status
                              };
                 return result.ToList();
+            }
+        }
+
+        public BookDetail GetBookDetailById(Book book)
+        {
+            using (PersonalBookLibraryContext context=new PersonalBookLibraryContext())
+            {
+                var result = from b in context.Books
+                             join c in context.Categories
+                             on b.CategoryID equals c.CategoryId
+                             where b.BookId == book.BookId
+                             select new BookDetail
+                             {
+                                 CategoryName = c.CategoryName,
+                                 AuthorName = b.AuthorName,
+                                 BookID = b.BookId,
+                                 BookName = b.BookName,
+                                 BookSummary = b.BookSummary,
+                                 Edition = b.Edition,
+                                 PublisherName = b.PublisherName,
+                                 InsertDate = b.InsertDate,
+                                 InsertUser = b.InsertUser,
+                                 UpdateDate = b.UpdateDate,
+                                 UpdateUser = b.UpdateUser,
+                                 LastUpdated = b.LastUpdated,
+                                 Status = b.Status
+                             };
+
+                return result.FirstOrDefault();
             }
         }
     }

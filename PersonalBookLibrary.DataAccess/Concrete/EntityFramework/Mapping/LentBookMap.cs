@@ -15,12 +15,11 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework.Mapping
             ToTable(@"LentBooks", @"dbo");
             HasKey(x => x.LentBookId);
 
-            Property(x => x.LentBookId).HasColumnName("BookId");
-            Property(x => x.BookName).HasColumnName("BookName");
-            Property(x => x.AuthorName).HasColumnName("AuthorName");
+            Property(x => x.LentBookId).HasColumnName("LentBookId");
             Property(x => x.BookID).HasColumnName("BookID");
-            Property(x => x.GivenPersonName).HasColumnName("GivenPersonName");
-            Property(x => x.GivenPersonLastName).HasColumnName("GivenPersonLastName");
+            Property(x => x.BorrowPersonName).HasColumnName("BorrowPersonName");
+            Property(x => x.BorrowPersonLastName).HasColumnName("BorrowPersonLastName");
+            Property(x => x.GivenUserName).HasColumnName("GivenUserName");
             Property(x => x.GivenDate).HasColumnName("GivenDate");
             Property(x => x.UndoDate).HasColumnName("UndoDate");
             Property(x => x.InsertUser).HasColumnName("InsertUser");

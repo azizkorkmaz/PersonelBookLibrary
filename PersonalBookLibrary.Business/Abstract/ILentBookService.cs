@@ -1,4 +1,5 @@
-﻿using PersonalBookLibrary.Entities.Concrete;
+﻿using PersonalBookLibrary.Entities.ComplexTypes;
+using PersonalBookLibrary.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,18 @@ namespace PersonalBookLibrary.Business.Abstract
 {
     public interface ILentBookService
     {
-        List<List<LentBook>> GetAll();
+        List<LentBook> GetAll();
 
-        List<LentBook> GetLentBook(LentBook lentBook);
-
-        LentBook GetByIdLentBook(int id);
+        List<List<LentBookDetail>> GetAllLentBookDetail();
 
         LentBook GetById(int id);
+
+        LentBookDetail GetByIdLentBookDetail(int id);
 
         LentBook Add(LentBook lentBook);
 
         LentBook Update(LentBook lentBook);
 
         LentBook LooseDelete(LentBook lentBook);
-
-        void HardDelete(LentBook lentBook);
     }
 }

@@ -75,9 +75,9 @@
                                                     <td><a href="@Url.Action("Detail","Book",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-info" type="button">Detay</a></td>
                                                     <td><a href="@Url.Action("Delete","Book",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-danger" type="button">Sil</a></td>
                                                 </tr>
+                                                i++;
                                             }
 
-                                            i++;
                                         }
 
                                     </tbody>

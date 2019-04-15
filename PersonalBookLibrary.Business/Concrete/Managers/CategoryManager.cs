@@ -11,6 +11,8 @@ using PersonalBookLibrary.Core.Aspects.Postsharp.PerformanceAspects;
 using AutoMapper;
 using PersonalBookLibrary.Core.Aspects.Postsharp.AuthorizationAspects;
 using System;
+using System.Web;
+using PersonalBookLibrary.Core.CrossCuttingConcerns.Security;
 
 namespace PersonalBookLibrary.Business.Concrete.Managers
 {
@@ -34,7 +36,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             /* Burada validate yapmamız doğru değil Solid e uygun değil. Bu kodu aspect şeklinde yazacağız.*/
             //ValidatorTool.FluentValidate(new CategoryValidator(), category);
             category.InsertDate = DateTime.Now.ToLocalTime();
-            category.InsertUser = "Aziz";//burayı cookie den çek
+            category.InsertUser = (HttpContext.Current.User.Identity as Identity).UserName;//burayı cookie den çek
             category.LastUpdated = false;
 
             var categoryAdd = _mapper.Map<Category, Category>(_categoryDal.Add(category));
@@ -71,7 +73,7 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
         {
             category.LastUpdated = true;
             category.UpdateDate = DateTime.Now.ToLocalTime();
-            category.UpdateUser = "Aziz";//burayı cookiden çek
+            category.UpdateUser = (HttpContext.Current.User.Identity as Identity).UserName;//burayı cookiden çek
 
             var categoryUpdate = _mapper.Map<Category, Category>(_categoryDal.Update(category));
             

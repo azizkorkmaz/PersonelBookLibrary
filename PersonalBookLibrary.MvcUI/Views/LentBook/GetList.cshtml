@@ -1,0 +1,102 @@
+﻿@model PersonalBookLibrary.MvcUI.Models.ComplexType.LentBookViewModel
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+<head>
+    <style>
+        .btn {
+            border-radius: 5px 5px;
+        }
+
+        .label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<html lang="en">
+<body>
+
+    <!-- Content -->
+    <div id="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <!-- Responsive table -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">Ödünç Verilen Kitaplar Listesi</header>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table footable table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sıra</th>
+                                            <th>Kitap Adı</th>
+                                            <th>Yazar Adı</th>
+                                            <th>Kategori</th>
+                                            <th>Ödünç Alanın Adı</th>
+                                            <th>Ödünç Verenin Adı</th>
+                                            <th>Ödünç Verme Tarihi</th>
+                                            <th>Güncelle</th>
+                                            <th>Detay</th>
+                                            <th>Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var lentBookDetail in Model.LentBookDetailList)
+                                        {
+                                            foreach (var lentBook in lentBookDetail)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>
+                                                        @lentBook.BookName
+                                                    </td>
+                                                    <td>
+                                                        @lentBook.AuthorName
+                                                    </td>
+                                                    <td>
+                                                        @lentBook.CategoryName
+                                                    </td>
+                                                    <td>
+                                                        @lentBook.BorrowPersonName  @lentBook.BorrowPersonLastName
+                                                    </td>
+                                                    <td>
+                                                        @lentBook.GivenUserName
+                                                    </td>
+                                                    <td>
+                                                        @lentBook.GivenDate
+                                                    </td>
+
+                                                    <td><a href="@Url.Action("Update","LentBook",new {book=Model.LentBookDetailList.ToList(), id=lentBook.LentBookID})" class="btn btn-success" type="button">Güncelle</a></td>
+                                                    <td><a href="@Url.Action("LentBookDetail","LentBook",new {book = Model.LentBookDetailList.ToList(), id=lentBook.LentBookID })" class="btn btn-info" type="button">Detay</a></td>
+                                                    <td><a href="@Url.Action("Delete","LentBook",new {book = Model.LentBookDetailList.ToList(), id=lentBook.LentBookID })" class="btn btn-danger" type="button">Sil</a></td>
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Responsive table -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /Content -->
+
+</body>
+</html>
