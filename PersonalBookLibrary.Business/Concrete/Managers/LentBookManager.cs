@@ -66,21 +66,46 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             }
         }
 
-        public List<List<LentBookDetail>> GetAllLentBookDetail()
+        public List<LentBookDetail> GetAllActiveLentBookDetail()
         {
             try
             {
                 var lentBookDetails = new List<LentBookDetail>();
-                var lentBookDetailList = new List<List<LentBookDetail>>();
+                var lentBookDetail = new LentBookDetail();
+                var lentBooks = new List<LentBook>();
+                lentBooks = 
+                    _mapper.Map<List<LentBook>, List<LentBook>>
+                    (_lentBookDal.GetList(lb=>lb.Status==true));
+
+                foreach (var lentBook in lentBooks)
+                {
+                    lentBookDetail = _mapper.Map<LentBookDetail, LentBookDetail>(_lentBookDal.GetByIdLentBookDetail(lentBook.LentBookId));
+
+                    lentBookDetails.Add(lentBookDetail);
+                }
+                return lentBookDetails;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<LentBookDetail> GetAllLentBookDetail()
+        {
+            try
+            {
+                var lentBookDetails = new List<LentBookDetail>();
+                var lentBookDetail = new LentBookDetail();
                 var lentBooks = new List<LentBook>();
                 lentBooks = _mapper.Map<List<LentBook>, List<LentBook>>(_lentBookDal.GetList());
                 foreach (var lentBook in lentBooks)
                 {
-                    lentBookDetails = _mapper.Map<List<LentBookDetail>, List<LentBookDetail>>(_lentBookDal.GetLentBookDetail(lentBook));
+                    lentBookDetail = _mapper.Map<LentBookDetail, LentBookDetail>(_lentBookDal.GetByIdLentBookDetail(lentBook.LentBookId));
 
-                    lentBookDetailList.Add(lentBookDetails);
+                    lentBookDetails.Add(lentBookDetail);
                 }
-                return lentBookDetailList;
+                return lentBookDetails;
             }
             catch (Exception)
             {
@@ -170,5 +195,36 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
                 throw;
             }
         }
+
+        public LentBook UndoBook(LentBook lentBook)
+        {
+            try
+            {
+                var undoBook = new LentBook();
+                if (lentBook != null)
+                {
+                    lentBook.Status = false;
+                    lentBook.LastUpdated = true;
+                    lentBook.UpdateDate = DateTime.Now.ToLocalTime();
+                    lentBook.UpdateUser = "Aziz"/*(HttpContext.Current.User.Identity as Identity).UserName*/;
+                    lentBook.UndoDate = DateTime.Now.ToLocalTime();
+
+                    var book = _bookDal.Get(b => b.BookId == lentBook.BookID);
+                    book.Status = true;
+                    book = _bookDal.Update(book);
+
+                    undoBook = _mapper.Map<LentBook,LentBook>(_lentBookDal.LooseDelete(lentBook));
+                }
+
+                return undoBook;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+       
     }
 }

@@ -1,4 +1,5 @@
 ﻿using PersonalBookLibrary.Business.Abstract;
+using PersonalBookLibrary.Entities.ComplexTypes;
 using PersonalBookLibrary.MvcUI.Models.ComplexType;
 using System;
 using System.Collections.Generic;
@@ -19,18 +20,18 @@ namespace PersonalBookLibrary.MvcUI.Controllers
 
         public ActionResult Index()
         {
-            var model = new BookCategoryViewModel();
-
-            model.BookDetailList = _bookService.GetAll();
-            foreach (var bookDetail in model.BookDetailList)
+            var bookDetail = new BookDetail();
+            var bookDetails = _bookService.GetActiveBook();
+            foreach (var book in bookDetails)
             {
-                model.BookDetails = bookDetail;
-
-                foreach (var book in bookDetail)
-                {
-                    model.BookDetail = book;
-                }
+                bookDetail = _bookService.GetByIdBookDetail(book.BookID);
             }
+
+            var model = new BookCategoryViewModel
+            {
+                BookDetails = bookDetails,
+                BookDetail = bookDetail
+            };
 
             return View(model);
         }

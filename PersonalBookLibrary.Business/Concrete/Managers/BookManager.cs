@@ -41,36 +41,39 @@ namespace PersonalBookLibrary.Business.Concrete.Managers
             return bookAdd;
         }
 
-        public List<List<BookDetail>> GetActiveBook()
+        public List<BookDetail> GetActiveBook()
         {
             //burada statusu true olan kitapların listesini çek
-            var bookDetails = new List<List<BookDetail>>();
-            var bookDetail = new List<BookDetail>();
+            var bookDetails = new List<BookDetail>();
+            var bookDetail = new BookDetail();
             var activeBooks = 
                 _mapper.Map<List<Book>, List<Book>>(_bookDal.GetList(b=>b.Status==true)).ToList();
             foreach (var book in activeBooks)
             {
                 bookDetail = 
-                    _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book));
+                    _mapper.Map<BookDetail, BookDetail>(_bookDal.GetBookDetailById(book.BookId));
+
                 bookDetails.Add(bookDetail);
             }
             return bookDetails;
         }
 
-        public List<List<BookDetail>> GetAll()
+        public List<BookDetail> GetAll()
         {
-            var bookDetail = new List<BookDetail>();
-            var bookDetailList = new List<List<BookDetail>>();
+            var bookDetail = new BookDetail();
+            var bookDetails = new List<BookDetail>();
             var bookGetAll = _mapper.Map<List<Book>, List<Book>>(_bookDal.GetList());
 
             foreach (var book in bookGetAll)
             {
                 bookDetail = 
-                    _mapper.Map<List<BookDetail>, List<BookDetail>>(_bookDal.GetBookDetail(book)).ToList();
-                bookDetailList.Add(bookDetail);
+                    _mapper.Map<BookDetail, BookDetail>
+                    (_bookDal.GetBookDetailById(book.BookId));
+
+                bookDetails.Add(bookDetail);
             }
 
-            return bookDetailList;
+            return bookDetails;
         }
 
         public List<Book> GetAllBook()

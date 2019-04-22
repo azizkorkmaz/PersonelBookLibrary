@@ -49,30 +49,26 @@
                                     </thead>
                                     <tbody>
 
-                                            @foreach (var bookDetail in Model.BookDetailList)
+                                            @foreach (var bookDetail in Model.BookDetails)
                                             {
-                                                foreach (var book in bookDetail)
-                                                {
                                                     <tr>
                                                         <td>@i</td>
                                                         <td>
-                                                            @book.BookName
+                                                            @bookDetail.BookName
                                                         </td>
                                                         <td>
-                                                            @book.AuthorName
+                                                            @bookDetail.AuthorName
                                                         </td>
                                                         <td>
-                                                            @book.CategoryName
+                                                            @bookDetail.CategoryName
                                                         </td>
 
-                                                        <td>@book.InsertUser</td>
-                                                        <td><a href="@Url.Action("Insert","LentBook",new {book=Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-success" type="button">Ödünç Ver</a></td>
-                                                        <td><a href="@Url.Action("BookDetail","LentBook",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-info" type="button">Detay</a></td>
+                                                        <td>@bookDetail.InsertUser</td>
+                                                        <td><a href="@Url.Action("Insert","LentBook",new {book=Model.BookDetails.ToList(), id=bookDetail.BookID})" class="btn btn-success" type="button">Ödünç Ver</a></td>
+                                                        <td><a href="@Url.Action("BookDetail","LentBook",new {book = Model.BookDetails.ToList(), id=bookDetail.BookID})" class="btn btn-info" type="button">Detay</a></td>
                                                         <td><a href="@Url.Action("GetList","Book")" class="btn btn-primary" type="button">Geri Dön</a></td>
                                                     </tr>
-                                                }
-
-
+                                                
                                                 i++;
                                             }
 

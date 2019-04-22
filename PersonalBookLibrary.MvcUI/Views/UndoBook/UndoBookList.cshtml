@@ -43,9 +43,8 @@
                                             <th>Ödünç Alanın Adı</th>
                                             <th>Ödünç Verenin Adı</th>
                                             <th>Ödünç Verme Tarihi</th>
-                                            <th>Güncelle</th>
+                                            <th>İade Al</th>
                                             <th>Detay</th>
-                                            <th>Sil</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,9 +73,8 @@
                                                     @lentBookDetail.GivenDate
                                                 </td>
 
-                                                <td><a href="@Url.Action("Update","LentBook",new {book=Model.LentBookDetails.ToList(), id=lentBookDetail.LentBookID})" class="btn btn-success" type="button">Güncelle</a></td>
-                                                <td><a href="@Url.Action("LentBookDetail","LentBook",new {book = Model.LentBookDetails.ToList(), id=lentBookDetail.LentBookID })" class="btn btn-info" type="button">Detay</a></td>
-                                                <td><a href="@Url.Action("Delete","LentBook",new {book = Model.LentBookDetails.ToList(), id=lentBookDetail.LentBookID })" class="btn btn-danger" type="button">Sil</a></td>
+                                                <td><a href="@Url.Action("UndoBook","UndoBook",new {book=Model.LentBookDetails.ToList(), id=lentBookDetail.LentBookID})" class="btn btn-success" type="button">İade Al</a></td>
+                                                <td><a href="@Url.Action("UndoBookDetail","UndoBook",new {book = Model.LentBookDetails.ToList(), id=lentBookDetail.LentBookID })" class="btn btn-info" type="button">Detay</a></td>
                                             </tr>
                                             i++;
                                         }

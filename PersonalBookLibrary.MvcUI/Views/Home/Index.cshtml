@@ -15,8 +15,9 @@
         .label {
             font-size: 14px;
         }
-        .table{
-            text-align:justify;
+
+        .table {
+            text-align: justify;
         }
     </style>
 </head>
@@ -50,25 +51,23 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var bookDetail in Model.BookDetailList)
+                                        @foreach (var bookDetail in Model.BookDetails)
                                         {
-                                            foreach (var book in bookDetail)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>
-                                                        @book.BookName
-                                                    </td>
-                                                    <td>
-                                                        @book.CategoryName
-                                                    </td>
-                                                    <td>@book.AuthorName</td>
-                                                    <td>@book.PublisherName</td>
-                                                    <td>@book.Edition</td>
-                                                    <td><button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bookSummaryModalLong">Kitap Özeti</button></td>
-                                                </tr>
-                                            }
-
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>
+                                                    @bookDetail.BookName
+                                                </td>
+                                                <td>
+                                                    @bookDetail.CategoryName
+                                                </td>
+                                                <td>@bookDetail.AuthorName</td>
+                                                <td>@bookDetail.PublisherName</td>
+                                                <td>@bookDetail.Edition</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bookSummaryModalLong">Kitap Özeti</button>
+                                                </td>
+                                            </tr>
                                             i++;
                                         }
 

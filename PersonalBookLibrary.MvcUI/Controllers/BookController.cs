@@ -26,7 +26,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         {
             var model = new BookCategoryViewModel
             {
-                 BookDetailList=_bookService.GetAll()
+                 BookDetails=_bookService.GetAll()
             };
 
             return View(model);
@@ -51,7 +51,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
             var model = new BookCategoryViewModel
             {
                 Book = _bookService.Add(book),
-                BookDetailList = _bookService.GetAll()
+                BookDetails = _bookService.GetAll()
             };
 
             return RedirectToAction("GetList");
@@ -77,7 +77,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
             var model = new BookCategoryViewModel
             {
                 Book = _bookService.Update(book),
-                BookDetailList = _bookService.GetAll()
+                BookDetails = _bookService.GetAll()
             };
 
             return RedirectToAction("GetList");
@@ -100,11 +100,10 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         [Route("delete")]
         public ActionResult Delete(Book book)
         {
-            //book.status u false olmuyor 27.01.2019
             var model = new BookCategoryViewModel
             {
                 Book = _bookService.Update(book),
-                BookDetailList=_bookService.GetAll()
+                BookDetails=_bookService.GetAll()
             };
 
             return View("GetList");
@@ -115,7 +114,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         {
             var model = new BookCategoryViewModel
             {
-                BookDetailList = _bookService.GetAll(),
+                BookDetails = _bookService.GetAll(),
                 BookDetail = _bookService.GetByIdBookDetail(id)
             };
 

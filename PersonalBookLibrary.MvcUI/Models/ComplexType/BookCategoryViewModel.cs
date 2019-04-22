@@ -15,6 +15,5 @@ namespace PersonalBookLibrary.MvcUI.Models.ComplexType
         public List<Category> Categories { get; set; }
         public BookDetail BookDetail { get; set; }
         public List<BookDetail> BookDetails { get; set; }
-        public List<List<BookDetail>> BookDetailList { get; set; }
     }
 }

@@ -230,6 +230,7 @@
     <Compile Include="Controllers\LentBookController.cs" />
     <Compile Include="Controllers\ReadBookController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UndoBookController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -297,6 +298,9 @@
     <Content Include="Views\LentBook\Update.cshtml" />
     <Content Include="Views\LentBook\LentBookDetail.cshtml" />
     <Content Include="Views\LentBook\Delete.cshtml" />
+    <Content Include="Views\UndoBook\UndoBookList.cshtml" />
+    <Content Include="Views\UndoBook\UndoBook.cshtml" />
+    <Content Include="Views\UndoBook\UndoBookDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,14 +14,12 @@ namespace PersonalBookLibrary.MvcUI.Controllers
     {
         private ILentBookService _lentBookService;
         private IBookService _bookService;
-        private IUserService _userService;
 
         public LentBookController(ILentBookService lentBookService,
-            IBookService bookService, IUserService userService)
+            IBookService bookService)
         {
             _lentBookService = lentBookService;
             _bookService = bookService;
-            _userService = userService;
         }
 
         [HttpGet]
@@ -29,7 +27,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         {
             var model = new LentBookViewModel
             {
-                BookDetailList = _bookService.GetActiveBook().ToList()
+                BookDetails = _bookService.GetActiveBook().ToList()
             };
 
             return View(model);
@@ -72,7 +70,7 @@ namespace PersonalBookLibrary.MvcUI.Controllers
         {
             var model = new LentBookViewModel
             {
-                LentBookDetailList = _lentBookService.GetAllLentBookDetail()
+                LentBookDetails = _lentBookService.GetAllLentBookDetail()
             };
 
             return View(model);

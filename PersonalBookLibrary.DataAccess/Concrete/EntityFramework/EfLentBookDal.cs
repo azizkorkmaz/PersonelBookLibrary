@@ -34,7 +34,7 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
                                  UndoDate = lb.UndoDate
                              };
 
-                return result.FirstOrDefault();  //burası nasıl çevirmek lazım
+                return result.FirstOrDefault();  
             }
         }
 

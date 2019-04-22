@@ -48,35 +48,32 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var bookDetail in Model.BookDetailList)
+                                        @foreach (var bookDetail in Model.BookDetails)
                                         {
-                                            foreach (var book in bookDetail)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>
-                                                        @book.BookName
-                                                    </td>
-                                                    <td>
-                                                        @book.CategoryName
-                                                    </td>
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>
+                                                    @bookDetail.BookName
+                                                </td>
+                                                <td>
+                                                    @bookDetail.CategoryName
+                                                </td>
 
-                                                    @if (book.Status)
-                                                    {
-                                                        <td><span class="label label-success">Aktif</span></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><span class="label label-danger">Pasif</span></td>
-                                                    }
+                                                @if (bookDetail.Status)
+                                                {
+                                                    <td><span class="label label-success">Aktif</span></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="label label-danger">Pasif</span></td>
+                                                }
 
-                                                    <td>@book.InsertUser</td>
-                                                    <td><a href="@Url.Action("Update","Book",new {book=Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-success" type="button">Güncelle</a></td>
-                                                    <td><a href="@Url.Action("Detail","Book",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-info" type="button">Detay</a></td>
-                                                    <td><a href="@Url.Action("Delete","Book",new {book = Model.BookDetailList.ToList(), id=book.BookID})" class="btn btn-danger" type="button">Sil</a></td>
-                                                </tr>
-                                                i++;
-                                            }
+                                                <td>@bookDetail.InsertUser</td>
+                                                <td><a href="@Url.Action("Update","Book",new {book=Model.BookDetails.ToList(), id=bookDetail.BookID})" class="btn btn-success" type="button">Güncelle</a></td>
+                                                <td><a href="@Url.Action("Detail","Book",new {book = Model.BookDetails.ToList(), id=bookDetail.BookID})" class="btn btn-info" type="button">Detay</a></td>
+                                                <td><a href="@Url.Action("Delete","Book",new {book = Model.BookDetails.ToList(), id=bookDetail.BookID})" class="btn btn-danger" type="button">Sil</a></td>
+                                            </tr>
+                                            i++;
 
                                         }
 

@@ -40,14 +40,14 @@ namespace PersonalBookLibrary.DataAccess.Concrete.EntityFramework
             }
         }
 
-        public BookDetail GetBookDetailById(Book book)
+        public BookDetail GetBookDetailById(int id)
         {
             using (PersonalBookLibraryContext context=new PersonalBookLibraryContext())
             {
                 var result = from b in context.Books
                              join c in context.Categories
                              on b.CategoryID equals c.CategoryId
-                             where b.BookId == book.BookId
+                             where b.BookId == id
                              select new BookDetail
                              {
                                  CategoryName = c.CategoryName,

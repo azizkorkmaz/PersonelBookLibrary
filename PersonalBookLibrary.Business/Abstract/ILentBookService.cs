@@ -12,9 +12,13 @@ namespace PersonalBookLibrary.Business.Abstract
     {
         List<LentBook> GetAll();
 
-        List<List<LentBookDetail>> GetAllLentBookDetail();
+        List<LentBookDetail> GetAllLentBookDetail();
+
+        List<LentBookDetail> GetAllActiveLentBookDetail();
 
         LentBook GetById(int id);
+
+        LentBook UndoBook(LentBook lentBook);
 
         LentBookDetail GetByIdLentBookDetail(int id);
 
